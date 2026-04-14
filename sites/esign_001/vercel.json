@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "buildCommand": "pip install -r requirements.txt && python build.py --site sites/esign_001",
+  "outputDirectory": "sites/esign_001/output",
+  "installCommand": "pip install -r requirements.txt",
+  "framework": null,
+  "routes": [
+    {
+      "src": "/sitemap.xml",
+      "dest": "/sitemap.xml",
+      "headers": { "Cache-Control": "public, max-age=86400" }
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/robots.txt",
+      "headers": { "Cache-Control": "public, max-age=86400" }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

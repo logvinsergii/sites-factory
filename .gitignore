@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.env
+venv/
+sites/*/output/
+sites/*/content_history/
+.DS_Store

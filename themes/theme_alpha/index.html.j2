@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="{{ config.site.lang | default('en') }}">
+<head>
+  {{ head_tags | safe }}
+  <style>
+    /* ── Theme Alpha: Design System ──────────────────────────────────────── */
+    /* Aesthetic: Editorial-Refined · Dark ink + electric accent · Geometric */
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+    :root {
+      --ink:        #0f1117;
+      --ink-soft:   #3d4152;
+      --ink-muted:  #8b8fa8;
+      --surface:    #ffffff;
+      --surface-2:  #f7f7fb;
+      --surface-3:  #eeeef6;
+      --accent:     #2a5cff;
+      --accent-soft:#dce6ff;
+      --accent-dark:#1a3db5;
+      --green:      #0d7a55;
+      --green-soft: #d1f5e8;
+      --red:        #c41c1c;
+      --red-soft:   #fde8e8;
+      --orange:     #c45c00;
+      --orange-soft:#fff0e0;
+      --blue-soft:  #e8f0ff;
+      --radius:     10px;
+      --radius-lg:  18px;
+      --shadow-sm:  0 1px 4px rgba(15,17,23,.07);
+      --shadow-md:  0 4px 20px rgba(15,17,23,.10);
+      --shadow-lg:  0 12px 40px rgba(15,17,23,.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--surface);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'DM Serif Display', serif;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    /* ── Page wrapper ── */
+    .page-wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Section base ── */
+    .section { padding: 72px 0; }
+    .section--sm { padding: 48px 0; }
+    .section--alt { background: var(--surface-2); }
+    .section--dark { background: var(--ink); color: #fff; }
+    .section--dark h2, .section--dark h3 { color: #fff; }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      margin-bottom: 12px;
+    }
+    .section-intro {
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin-bottom: 40px;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--surface-3);
+      padding: 0 24px;
+    }
+    .navbar-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .navbar-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem; color: var(--ink); text-decoration: none;
+    }
+    .navbar-cta {
+      background: var(--accent); color: #fff;
+      padding: 8px 20px; border-radius: var(--radius);
+      font-size: .875rem; font-weight: 500; text-decoration: none;
+      transition: background .18s;
+    }
+    .navbar-cta:hover { background: var(--accent-dark); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 96px 0 80px;
+      background: linear-gradient(145deg, #f0f4ff 0%, #ffffff 60%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 80% 20%, rgba(42,92,255,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-block;
+      font-family: 'DM Mono', monospace; font-size: .75rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-soft);
+      padding: 4px 12px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      line-height: 1.1; color: var(--ink); max-width: 700px;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 1.125rem; color: var(--ink-soft);
+      max-width: 560px; margin-bottom: 36px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      padding: 14px 28px; border-radius: var(--radius);
+      font-weight: 500; font-size: 1rem; text-decoration: none;
+      box-shadow: 0 4px 16px rgba(42,92,255,.30);
+      transition: all .2s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--ink);
+      padding: 14px 28px; border-radius: var(--radius);
+      font-weight: 500; font-size: 1rem; text-decoration: none;
+      border: 1.5px solid var(--surface-3);
+      transition: all .2s;
+    }
+    .btn-ghost:hover { border-color: var(--ink-muted); }
+
+    /* ── Last-updated badge ── */
+    .last-updated {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .8rem; color: var(--ink-muted);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 32px;
+    }
+    .last-updated::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); display: inline-block;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       BLOCK COMPONENTS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* intro_what_is ── full-width prose */
+    .block-intro p {
+      font-size: 1.075rem; color: var(--ink-soft);
+      max-width: 760px; line-height: 1.75;
+    }
+
+    /* why_should_you_box ── blue highlight card */
+    .block-why {
+      background: var(--blue-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+    .block-why p { font-size: 1rem; color: var(--ink-soft); line-height: 1.7; }
+
+    /* who_uses_checkmarks_blue ── checklist */
+    .block-who-intro, .block-who-outro {
+      color: var(--ink-soft); font-size: .975rem;
+      max-width: 640px; margin-bottom: 20px;
+    }
+    .block-who-outro { margin-top: 20px; margin-bottom: 0; }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .975rem; color: var(--ink-soft);
+    }
+    .checklist li::before {
+      content: '✓';
+      min-width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* key_features_6_cards / key_features_4_cards ── card grids */
+    .card-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .card-grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .feat-card {
+      background: var(--surface); border: 1.5px solid var(--surface-3);
+      border-radius: var(--radius-lg); padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .feat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .feat-card-label {
+      font-weight: 600; font-size: .95rem; color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .feat-card-text { font-size: .9rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* user_profiles_green ── profile cards */
+    .profile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .profile-card {
+      background: var(--green-soft); border-radius: var(--radius-lg);
+      padding: 28px 24px; border-left: 4px solid var(--green);
+    }
+    .profile-card-label { font-weight: 600; color: var(--green); margin-bottom: 10px; }
+    .profile-card-text { font-size: .9rem; color: var(--ink-soft); line-height: 1.65; }
+
+    /* security_data_green ── 2-col reference list */
+    .data-list {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .data-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--green-soft); border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .data-item-label {
+      font-weight: 600; font-size: .875rem; color: var(--green);
+      min-width: 120px; flex-shrink: 0;
+    }
+    .data-item-text { font-size: .875rem; color: var(--ink-soft); }
+
+    /* penalties_risks_red */
+    .risk-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .risk-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--red-soft); border-radius: var(--radius);
+      padding: 16px 18px; border-left: 3px solid var(--red);
+    }
+    .risk-item-label { font-weight: 600; font-size: .875rem; color: var(--red); min-width: 120px; flex-shrink: 0; }
+    .risk-item-text { font-size: .875rem; color: var(--ink-soft); }
+
+    /* challenges_orange_bullets */
+    .challenge-list { display: flex; flex-direction: column; gap: 14px; }
+    .challenge-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--orange-soft); border-radius: var(--radius);
+      padding: 16px 20px; border-left: 3px solid var(--orange);
+    }
+    .challenge-item::before {
+      content: '!'; min-width: 24px; height: 24px;
+      background: var(--orange); color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .8rem; flex-shrink: 0; margin-top: 1px;
+    }
+    .challenge-item-text { font-size: .9rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* step_guide_vertical ── numbered vertical */
+    .steps-v { display: flex; flex-direction: column; gap: 0; }
+    .step-v {
+      display: flex; gap: 20px; align-items: flex-start;
+      position: relative;
+    }
+    .step-v:not(:last-child)::after {
+      content: ''; position: absolute;
+      left: 19px; top: 44px; width: 2px;
+      height: calc(100% - 8px);
+      background: var(--surface-3);
+    }
+    .step-v-num {
+      min-width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: .875rem; flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .step-v-body { padding: 8px 0 32px; }
+    .step-v-label { font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .step-v-text { font-size: .9rem; color: var(--ink-soft); }
+
+    /* step_guide_grid */
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .step-grid-card {
+      background: var(--surface-2); border-radius: var(--radius-lg);
+      padding: 24px; border: 1.5px solid var(--surface-3);
+    }
+    .step-grid-num {
+      font-family: 'DM Mono', monospace; font-size: .75rem;
+      color: var(--accent); font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .step-grid-label { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+    .step-grid-text { font-size: .875rem; color: var(--ink-soft); }
+
+    /* how_it_works_arrows */
+    .arrows-flow {
+      display: flex; align-items: flex-start; gap: 0;
+      flex-wrap: wrap;
+    }
+    .arrow-step {
+      flex: 1; min-width: 180px; text-align: center;
+      padding: 28px 20px;
+      position: relative;
+    }
+    .arrow-step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -14px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.25rem; color: var(--accent);
+    }
+    .arrow-step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .95rem;
+      margin: 0 auto 14px;
+    }
+    .arrow-step-label { font-weight: 600; color: var(--ink); font-size: .95rem; margin-bottom: 6px; }
+    .arrow-step-text { font-size: .85rem; color: var(--ink-soft); }
+
+    /* platform_requirements_box */
+    .platform-box {
+      background: var(--surface-2); border-radius: var(--radius-lg);
+      padding: 32px; border: 1.5px solid var(--surface-3);
+    }
+    .platform-intro, .platform-outro {
+      color: var(--ink-soft); font-size: .975rem; max-width: 680px;
+    }
+    .platform-outro { margin-top: 24px; }
+    .platform-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .platform-item { display: flex; gap: 14px; align-items: flex-start; }
+    .platform-item-label { font-weight: 600; font-size: .875rem; color: var(--ink); min-width: 140px; }
+    .platform-item-text { font-size: .875rem; color: var(--ink-soft); }
+
+    /* workflow_setup_table */
+    .workflow-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; }
+    .workflow-table th {
+      background: var(--ink); color: #fff; text-align: left;
+      padding: 12px 18px; font-size: .875rem; font-weight: 500;
+      font-family: 'DM Mono', monospace; letter-spacing: .04em;
+    }
+    .workflow-table td {
+      padding: 12px 18px; font-size: .875rem; color: var(--ink-soft);
+      border-bottom: 1px solid var(--surface-3);
+    }
+    .workflow-table tr:last-child td { border-bottom: none; }
+    .workflow-table tr:nth-child(even) td { background: var(--surface-2); }
+    .workflow-label-col { font-weight: 600; color: var(--ink) !important; }
+
+    /* comparison_check_table */
+    .comp-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .comp-table th {
+      background: var(--ink); color: #fff; padding: 12px 18px;
+      font-size: .875rem; font-weight: 500; text-align: left;
+      font-family: 'DM Mono', monospace;
+    }
+    .comp-table td { padding: 12px 18px; font-size: .875rem; color: var(--ink-soft); border-bottom: 1px solid var(--surface-3); }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tr:nth-child(even) td { background: var(--surface-2); }
+    .comp-yes { color: var(--green); font-weight: 600; }
+    .comp-no { color: var(--red); }
+
+    /* pricing_comparison_table */
+    .pricing-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
+    .pricing-table th {
+      background: var(--ink); color: #fff; padding: 14px 18px;
+      font-size: .8rem; font-weight: 500; text-align: left;
+      font-family: 'DM Mono', monospace; letter-spacing: .04em;
+    }
+    .pricing-table th:nth-child(2) { background: var(--accent); }
+    .pricing-table td { padding: 13px 18px; font-size: .875rem; color: var(--ink-soft); border-bottom: 1px solid var(--surface-3); }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table td:nth-child(2) { font-weight: 600; color: var(--ink); background: var(--accent-soft); }
+    .pricing-table tr:nth-child(even) td { background: var(--surface-2); }
+    .pricing-table tr:nth-child(even) td:nth-child(2) { background: var(--accent-soft); }
+    .recommended-badge {
+      display: inline-block; background: var(--accent); color: #fff;
+      font-size: .65rem; padding: 2px 7px; border-radius: 100px;
+      font-weight: 600; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* deadlines_dated_list */
+    .deadlines-list { display: flex; flex-direction: column; gap: 16px; }
+    .deadline-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--surface-2); border-radius: var(--radius);
+      padding: 16px 20px; border-left: 3px solid var(--accent);
+    }
+    .deadline-label { font-weight: 600; color: var(--ink); font-size: .875rem; min-width: 160px; flex-shrink: 0; }
+    .deadline-text { font-size: .875rem; color: var(--ink-soft); }
+
+    /* deadlines_vertical_dashed ── milestone timeline */
+    .milestone-list { display: flex; flex-direction: column; gap: 0; }
+    .milestone-item { display: flex; gap: 20px; position: relative; }
+    .milestone-item:not(:last-child)::after {
+      content: ''; position: absolute; left: 19px; top: 44px;
+      width: 2px; height: calc(100% - 8px);
+      background: repeating-linear-gradient(to bottom, var(--surface-3) 0, var(--surface-3) 6px, transparent 6px, transparent 12px);
+    }
+    .milestone-num {
+      min-width: 40px; height: 40px; border-radius: 50%;
+      background: var(--surface); border: 2px solid var(--accent);
+      color: var(--accent); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; font-size: .8rem;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .milestone-body { padding: 8px 0 36px; }
+    .milestone-label { font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .milestone-text { font-size: .875rem; color: var(--ink-soft); }
+
+    /* deadlines_horizontal_steps */
+    .hsteps { display: flex; flex-wrap: wrap; gap: 0; counter-reset: hstep; }
+    .hstep {
+      flex: 1; min-width: 160px; padding: 24px 20px;
+      background: var(--surface-2); border-right: 1px solid var(--surface-3);
+      position: relative; text-align: center;
+    }
+    .hstep:last-child { border-right: none; }
+    .hstep-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--ink); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; margin: 0 auto 10px;
+    }
+    .hstep-label { font-weight: 600; font-size: .85rem; color: var(--ink); margin-bottom: 4px; }
+    .hstep-text { font-size: .8rem; color: var(--ink-muted); }
+
+    /* best_practices_list */
+    .practices-list { display: flex; flex-direction: column; gap: 20px; }
+    .practice-item { display: flex; gap: 16px; align-items: flex-start; }
+    .practice-icon {
+      min-width: 36px; height: 36px; border-radius: 8px;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .practice-label { font-weight: 600; color: var(--ink); margin-bottom: 4px; font-size: .95rem; }
+    .practice-text { font-size: .875rem; color: var(--ink-soft); line-height: 1.65; }
+
+    /* examples_case_cards */
+    .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+    .case-card {
+      background: var(--surface); border: 1.5px solid var(--surface-3);
+      border-radius: var(--radius-lg); padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .case-card-label {
+      font-family: 'DM Mono', monospace; font-size: .75rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .case-card-intro { font-size: .9rem; color: var(--ink-soft); margin-bottom: 12px; }
+    .case-card-point {
+      font-weight: 600; color: var(--ink); font-size: .95rem;
+      background: var(--accent-soft); padding: 8px 12px;
+      border-radius: 6px; margin-bottom: 12px;
+    }
+    .case-card-outro { font-size: .875rem; color: var(--ink-soft); line-height: 1.65; }
+
+    /* troubleshooting_accordion ── FAQ */
+    .accordion { display: flex; flex-direction: column; gap: 8px; }
+    .accordion-item {
+      border: 1.5px solid var(--surface-3); border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .accordion-btn {
+      width: 100%; text-align: left; padding: 18px 22px;
+      background: var(--surface); border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: 'DM Sans', sans-serif; font-size: .95rem;
+      font-weight: 500; color: var(--ink);
+      transition: background .15s;
+    }
+    .accordion-btn:hover { background: var(--surface-2); }
+    .accordion-btn::after { content: '+'; font-size: 1.25rem; color: var(--accent); transition: transform .2s; }
+    .accordion-btn.open::after { transform: rotate(45deg); }
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      background: var(--surface-2);
+    }
+    .accordion-body.open { max-height: 300px; }
+    .accordion-body-inner { padding: 16px 22px; font-size: .9rem; color: var(--ink-soft); line-height: 1.7; }
+
+    /* fillable_fields_guide */
+    .fields-list { display: flex; flex-direction: column; gap: 14px; }
+    .field-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--surface-2); border-radius: var(--radius);
+      padding: 16px 20px; border-left: 3px solid var(--accent);
+    }
+    .field-label {
+      font-family: 'DM Mono', monospace; font-size: .8rem;
+      color: var(--accent); font-weight: 500;
+      min-width: 150px; flex-shrink: 0; padding-top: 2px;
+    }
+    .field-text { font-size: .875rem; color: var(--ink-soft); line-height: 1.65; }
+
+    /* cost_calculator_box */
+    .cost-box {
+      background: var(--surface-2); border-radius: var(--radius-lg);
+      padding: 32px; border: 1.5px solid var(--surface-3);
+    }
+    .cost-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+    .cost-item {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 20px; border: 1px solid var(--surface-3);
+      text-align: center;
+    }
+    .cost-item-label { font-size: .8rem; color: var(--ink-muted); margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+    .cost-item-value { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); }
+
+    /* roi_stats_banner */
+    .roi-banner {
+      background: var(--ink); border-radius: var(--radius-lg);
+      padding: 48px 40px; color: #fff;
+    }
+    .roi-banner .section-intro { color: rgba(255,255,255,.7); }
+    .roi-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 32px; margin-top: 32px; }
+    .roi-stat-label {
+      font-family: 'DM Mono', monospace; font-size: .75rem;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: rgba(255,255,255,.5); margin-bottom: 8px;
+    }
+    .roi-stat-value { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: #fff; margin-bottom: 6px; }
+    .roi-stat-text { font-size: .875rem; color: rgba(255,255,255,.65); line-height: 1.55; }
+
+    /* state_requirements_table */
+    .state-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .state-table th { background: var(--ink); color: #fff; padding: 12px 18px; font-size: .875rem; text-align: left; font-family: 'DM Mono', monospace; }
+    .state-table td { padding: 12px 18px; font-size: .875rem; color: var(--ink-soft); border-bottom: 1px solid var(--surface-3); }
+    .state-table tr:last-child td { border-bottom: none; }
+    .state-table tr:nth-child(even) td { background: var(--surface-2); }
+    .state-name { font-weight: 600; color: var(--ink) !important; }
+
+    /* industry_notes_cards */
+    .industry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .industry-card {
+      background: var(--surface); border: 1.5px solid var(--surface-3);
+      border-radius: var(--radius-lg); padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .industry-label { font-weight: 600; color: var(--accent); font-size: .875rem; margin-bottom: 10px; text-transform: uppercase; font-family: 'DM Mono', monospace; letter-spacing: .06em; }
+    .industry-text { font-size: .875rem; color: var(--ink-soft); line-height: 1.65; }
+
+    /* retention_timeline */
+    .retention-list { display: flex; flex-direction: column; gap: 14px; }
+    .retention-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--surface-2); border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+    .retention-dot {
+      min-width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); margin-top: 4px; flex-shrink: 0;
+    }
+    .retention-label { font-weight: 600; color: var(--ink); font-size: .875rem; margin-bottom: 2px; }
+    .retention-text { font-size: .85rem; color: var(--ink-soft); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--ink); color: rgba(255,255,255,.5);
+      padding: 40px 24px; text-align: center; font-size: .875rem;
+    }
+    .footer-brand { font-family: 'DM Serif Display', serif; color: #fff; font-size: 1.25rem; margin-bottom: 8px; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .5s ease both; }
+    .fade-up-1 { animation-delay: .05s; }
+    .fade-up-2 { animation-delay: .12s; }
+    .fade-up-3 { animation-delay: .20s; }
+    .fade-up-4 { animation-delay: .28s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero { padding: 64px 0 56px; }
+      .section { padding: 52px 0; }
+      .arrows-flow { flex-direction: column; }
+      .arrow-step:not(:last-child)::after { display: none; }
+      .hsteps { flex-direction: column; }
+      .hstep { border-right: none; border-bottom: 1px solid var(--surface-3); }
+      .roi-banner { padding: 32px 24px; }
+      .pricing-table { font-size: .8rem; }
+      .pricing-table th, .pricing-table td { padding: 10px 12px; }
+      .comp-table th, .comp-table td { padding: 10px 12px; }
+      .workflow-table th, .workflow-table td { padding: 10px 12px; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2rem; }
+      .page-wrap { padding: 0 16px; }
+      .card-grid-3, .card-grid-2 { grid-template-columns: 1fr; }
+      .data-list, .risk-list { grid-template-columns: 1fr; }
+      .cost-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-brand">{{ config.site.name }}</a>
+      <a href="#get-started" class="navbar-cta">Get Started Free</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="page-wrap">
+      <p class="last-updated">Last updated: {{ last_updated }}</p>
+      <div class="hero-label">{{ config.site.lang | upper }} · Electronic Signature</div>
+      <h1 class="hero-title fade-up fade-up-1">{{ content.title }}</h1>
+      {% if hero %}
+      <p class="hero-sub fade-up fade-up-2">{{ hero.subheadline }}</p>
+      <div class="hero-actions fade-up fade-up-3">
+        <a href="{{ hero.cta_url | default('#get-started') }}" class="btn-primary" id="get-started">
+          {{ hero.cta_text | default('Get Started Free') }} →
+        </a>
+        <a href="#learn-more" class="btn-ghost">Learn More</a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- ── Content Sections ── -->
+  <main id="learn-more">
+  {% for section in content.sections %}
+
+    {# ── intro_what_is ── #}
+    {% if section.id == 'intro_what_is' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="block-intro">
+          {% for para in section.paragraphs %}<p>{{ para }}</p>{% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── why_should_you_box ── #}
+    {% elif section.id == 'why_should_you_box' %}
+    <section class="section--sm">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="block-why">
+          {% for para in section.paragraphs %}<p>{{ para }}</p>{% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── who_uses_checkmarks_blue ── #}
+    {% elif section.id == 'who_uses_checkmarks_blue' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs[0] is defined %}
+          <p class="block-who-intro">{{ section.paragraphs[0] | replace('[INTRO]', '') | trim }}</p>
+        {% endif %}
+        <ul class="checklist">
+          {% for bullet in section.bullets %}
+          <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+        {% if section.paragraphs[1] is defined %}
+          <p class="block-who-outro">{{ section.paragraphs[1] | replace('[OUTRO]', '') | trim }}</p>
+        {% endif %}
+      </div>
+    </section>
+
+    {# ── key_features_6_cards ── #}
+    {% elif section.id == 'key_features_6_cards' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="card-grid-3">
+          {% for b in section.bullets %}
+          <div class="feat-card">
+            <div class="feat-card-label">{{ b.label }}</div>
+            <div class="feat-card-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── key_features_4_cards ── #}
+    {% elif section.id == 'key_features_4_cards' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="card-grid-2">
+          {% for b in section.bullets %}
+          <div class="feat-card">
+            <div class="feat-card-label">{{ b.label }}</div>
+            <div class="feat-card-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── user_profiles_green ── #}
+    {% elif section.id == 'user_profiles_green' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="profile-grid">
+          {% for b in section.bullets %}
+          <div class="profile-card">
+            <div class="profile-card-label">{{ b.label }}</div>
+            <div class="profile-card-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── security_data_green ── #}
+    {% elif section.id == 'security_data_green' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="data-list">
+          {% for b in section.bullets %}
+          <div class="data-item">
+            <div class="data-item-label">{{ b.label }}</div>
+            <div class="data-item-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── penalties_risks_red ── #}
+    {% elif section.id == 'penalties_risks_red' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="risk-list">
+          {% for b in section.bullets %}
+          <div class="risk-item">
+            <div class="risk-item-label">{{ b.label }}</div>
+            <div class="risk-item-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── challenges_orange_bullets ── #}
+    {% elif section.id == 'challenges_orange_bullets' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="challenge-list">
+          {% for bullet in section.bullets %}
+          <div class="challenge-item">
+            <div class="challenge-item-text">{{ bullet }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── step_guide_vertical ── #}
+    {% elif section.id == 'step_guide_vertical' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="steps-v">
+          {% for b in section.bullets %}
+          <div class="step-v">
+            <div class="step-v-num">{{ loop.index }}</div>
+            <div class="step-v-body">
+              <div class="step-v-label">{{ b.label }}</div>
+              <div class="step-v-text">{{ b.text }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── step_guide_grid ── #}
+    {% elif section.id == 'step_guide_grid' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="steps-grid">
+          {% for b in section.bullets %}
+          <div class="step-grid-card">
+            <div class="step-grid-num">Step {{ loop.index }}</div>
+            <div class="step-grid-label">{{ b.label }}</div>
+            <div class="step-grid-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── how_it_works_arrows ── #}
+    {% elif section.id == 'how_it_works_arrows' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="arrows-flow">
+          {% for b in section.bullets %}
+          <div class="arrow-step">
+            <div class="arrow-step-num">{{ loop.index }}</div>
+            <div class="arrow-step-label">{{ b.label }}</div>
+            <div class="arrow-step-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── platform_requirements_box ── #}
+    {% elif section.id == 'platform_requirements_box' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="platform-box">
+          {% if section.paragraphs[0] is defined %}
+            <p class="platform-intro">{{ section.paragraphs[0] | replace('[INTRO]', '') | trim }}</p>
+          {% endif %}
+          <ul class="platform-list">
+            {% for b in section.bullets %}
+            <li class="platform-item">
+              <span class="platform-item-label">{{ b.label }}</span>
+              <span class="platform-item-text">{{ b.text }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+          {% if section.paragraphs[1] is defined %}
+            <p class="platform-outro">{{ section.paragraphs[1] | replace('[OUTRO]', '') | trim }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    {# ── workflow_setup_table ── #}
+    {% elif section.id == 'workflow_setup_table' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div style="overflow-x:auto">
+        <table class="workflow-table">
+          {% for b in section.bullets %}
+            {% if loop.first %}
+            <thead><tr>
+              <th>{{ b.label }}</th>
+              <th>{{ b.text }}</th>
+            </tr></thead><tbody>
+            {% else %}
+            <tr>
+              <td class="workflow-label-col">{{ b.label }}</td>
+              <td>{{ b.text }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    {# ── comparison_check_table ── #}
+    {% elif section.id == 'comparison_check_table' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div style="overflow-x:auto">
+        <table class="comp-table">
+          {% for b in section.bullets %}
+            {% set cols = b.text.split(' | ') %}
+            {% if loop.first %}
+            <thead><tr>
+              <th>{{ b.label }}</th>
+              {% for col in cols %}<th>{{ col }}</th>{% endfor %}
+            </tr></thead><tbody>
+            {% else %}
+            <tr>
+              <td style="font-weight:600;color:var(--ink)">{{ b.label }}</td>
+              {% for col in cols %}
+                <td class="{{ 'comp-yes' if col.lower() == 'yes' else ('comp-no' if col.lower() == 'no' else '') }}">{{ col }}</td>
+              {% endfor %}
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    {# ── pricing_comparison_table ── #}
+    {% elif section.id == 'pricing_comparison_table' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div style="overflow-x:auto">
+        <table class="pricing-table">
+          {% for b in section.bullets %}
+            {% set cols = b.text.split(' | ') %}
+            {% if loop.first %}
+            <thead><tr>
+              <th>{{ b.label }}</th>
+              {% for col in cols %}<th>{{ col }}</th>{% endfor %}
+            </tr></thead><tbody>
+            {% else %}
+            <tr>
+              <td style="font-weight:600;color:var(--ink)">{{ b.label }}</td>
+              {% for col in cols %}<td>{{ col }}</td>{% endfor %}
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    {# ── deadlines_dated_list ── #}
+    {% elif section.id == 'deadlines_dated_list' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="deadlines-list">
+          {% for b in section.bullets %}
+          <div class="deadline-item">
+            <div class="deadline-label">{{ b.label }}</div>
+            <div class="deadline-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── deadlines_vertical_dashed ── #}
+    {% elif section.id == 'deadlines_vertical_dashed' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="milestone-list">
+          {% for b in section.bullets %}
+          <div class="milestone-item">
+            <div class="milestone-num">{{ loop.index }}</div>
+            <div class="milestone-body">
+              <div class="milestone-label">{{ b.label }}</div>
+              <div class="milestone-text">{{ b.text }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── deadlines_horizontal_steps ── #}
+    {% elif section.id == 'deadlines_horizontal_steps' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="hsteps">
+          {% for b in section.bullets %}
+          <div class="hstep">
+            <div class="hstep-num">{{ loop.index }}</div>
+            <div class="hstep-label">{{ b.label }}</div>
+            <div class="hstep-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── best_practices_list ── #}
+    {% elif section.id == 'best_practices_list' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="practices-list">
+          {% for b in section.bullets %}
+          <div class="practice-item">
+            <div class="practice-icon">✦</div>
+            <div>
+              <div class="practice-label">{{ b.label }}</div>
+              <div class="practice-text">{{ b.text }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── examples_case_cards ── #}
+    {% elif section.id == 'examples_case_cards' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="case-grid">
+          {% for b in section.bullets %}
+            {% set parts = b.text.split(' :: ') %}
+          <div class="case-card">
+            <div class="case-card-label">{{ b.label }}</div>
+            {% if parts|length >= 1 %}<p class="case-card-intro">{{ parts[0] }}</p>{% endif %}
+            {% if parts|length >= 2 %}<p class="case-card-point">{{ parts[1] }}</p>{% endif %}
+            {% if parts|length >= 3 %}<p class="case-card-outro">{{ parts[2] }}</p>{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── fillable_fields_guide ── #}
+    {% elif section.id == 'fillable_fields_guide' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="fields-list">
+          {% for b in section.bullets %}
+          <div class="field-item">
+            <div class="field-label">{{ b.label }}</div>
+            <div class="field-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── cost_calculator_box ── #}
+    {% elif section.id == 'cost_calculator_box' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        <div class="cost-box">
+          {% if section.paragraphs[0] is defined %}
+            <p class="section-intro">{{ section.paragraphs[0] | replace('[INTRO]', '') | trim }}</p>
+          {% endif %}
+          <div class="cost-grid">
+            {% for b in section.bullets %}
+            <div class="cost-item">
+              <div class="cost-item-label">{{ b.label }}</div>
+              <div class="cost-item-value">{{ b.text }}</div>
+            </div>
+            {% endfor %}
+          </div>
+          {% if section.paragraphs[1] is defined %}
+            <p style="color:var(--ink-soft);font-size:.9rem;margin-top:8px">
+              {{ section.paragraphs[1] | replace('[OUTRO]', '') | trim }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    {# ── roi_stats_banner ── #}
+    {% elif section.id == 'roi_stats_banner' %}
+    <section class="section">
+      <div class="page-wrap">
+        <div class="roi-banner">
+          <h2 class="section-heading" style="color:#fff">{{ section.heading }}</h2>
+          {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+          <div class="roi-stats">
+            {% for b in section.bullets %}
+            <div>
+              <div class="roi-stat-label">{{ b.label }}</div>
+              <div class="roi-stat-text">{{ b.text }}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# ── state_requirements_table ── #}
+    {% elif section.id == 'state_requirements_table' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div style="overflow-x:auto">
+        <table class="state-table">
+          {% for b in section.bullets %}
+            {% set cols = b.text.split(' | ') %}
+            {% if loop.first %}
+            <thead><tr>
+              <th>{{ b.label }}</th>
+              {% for col in cols %}<th>{{ col }}</th>{% endfor %}
+            </tr></thead><tbody>
+            {% else %}
+            <tr>
+              <td class="state-name">{{ b.label }}</td>
+              {% for col in cols %}<td>{{ col }}</td>{% endfor %}
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    {# ── industry_notes_cards ── #}
+    {% elif section.id == 'industry_notes_cards' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="industry-grid">
+          {% for b in section.bullets %}
+          <div class="industry-card">
+            <div class="industry-label">{{ b.label }}</div>
+            <div class="industry-text">{{ b.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── retention_timeline ── #}
+    {% elif section.id == 'retention_timeline' %}
+    <section class="section section--alt">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="retention-list">
+          {% for b in section.bullets %}
+          <div class="retention-item">
+            <div class="retention-dot"></div>
+            <div>
+              <div class="retention-label">{{ b.label }}</div>
+              <div class="retention-text">{{ b.text }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {# ── troubleshooting_accordion (always last) ── #}
+    {% elif section.id == 'troubleshooting_accordion' %}
+    <section class="section">
+      <div class="page-wrap">
+        <h2 class="section-heading">{{ section.heading }}</h2>
+        {% if section.paragraphs %}<p class="section-intro">{{ section.paragraphs[0] }}</p>{% endif %}
+        <div class="accordion" id="faq-accordion">
+          {% for b in section.bullets %}
+          <div class="accordion-item">
+            <button class="accordion-btn" data-idx="{{ loop.index0 }}">{{ b.label }}</button>
+            <div class="accordion-body" id="acc-{{ loop.index0 }}">
+              <div class="accordion-body-inner">{{ b.text }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {% endif %}
+  {% endfor %}
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer-brand">{{ config.site.name }}</div>
+    {% if content.footer is defined %}
+    <p>{{ content.footer.tagline | default('') }}</p>
+    {% endif %}
+    <p style="margin-top:12px">© {{ now_year }} {{ config.site.name }}. All rights reserved.</p>
+  </footer>
+
+  <!-- ── Schema JSON-LD ── -->
+  {{ schema_ld | safe }}
+
+  <!-- ── Accordion JS ── -->
+  <script>
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx  = btn.dataset.idx;
+        const body = document.getElementById('acc-' + idx);
+        const open = btn.classList.contains('open');
+        // close all
+        document.querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('open'));
+        document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+        // open clicked (if wasn't open)
+        if (!open) { btn.classList.add('open'); body.classList.add('open'); }
+      });
+    });
+  </script>
+
+</body>
+</html>

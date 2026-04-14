@@ -1,0 +1,33 @@
+site:
+  name: "eSign Pro"
+  domain: "esign-pro.vercel.app"
+  lang: "en"
+  theme: "theme_alpha"
+
+seo:
+  title: "Free Electronic Signature Tool | eSign Pro"
+  description: "Sign documents online — fast, secure, and legally binding. eSign Pro supports PDF, DOCX, and more. ESIGN and UETA compliant."
+  date_published: "2025-01-15T10:00:00Z"
+  date_modified:  "2025-04-14T10:00:00Z"
+  og_image: "https://esign-pro.vercel.app/og.png"
+  hreflang:
+    - lang: "en"
+      url:  "https://esign-pro.vercel.app/"
+
+schema:
+  product_name:        "eSign Pro"
+  product_description: "A secure, ESIGN-compliant eSignature platform for individuals and businesses."
+  product_category:    "Productivity"
+  rating_value:        4.7
+  rating_count:        1240
+  breadcrumbs:
+    - name: "Home"
+      url:  "https://esign-pro.vercel.app/"
+
+organization:
+  name:    "eSign Pro"
+  logo:    "https://esign-pro.vercel.app/logo.png"
+  same_as: []
+
+analytics:
+  ahrefs_site_id: ""   # paste your Ahrefs Web Analytics site ID here

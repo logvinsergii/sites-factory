@@ -1,0 +1,154 @@
+{
+  "title": "Electronic Signature — Sign Documents Online",
+  "hero": {
+    "subheadline": "Sign, send, and manage documents electronically. Legally binding in all 50 U.S. states under the ESIGN Act and UETA.",
+    "cta_text": "Get Started Free",
+    "cta_url": "#get-started"
+  },
+  "footer": {
+    "tagline": "Legally binding electronic signatures for individuals and businesses."
+  },
+  "sections": [
+    {
+      "id": "intro_what_is",
+      "heading": "What Is an Electronic Signature?",
+      "paragraphs": [
+        "An electronic signature is a legally recognized method of signing documents in digital form. Under the Electronic Signatures in Global and National Commerce Act (ESIGN) and the Uniform Electronic Transactions Act (UETA), electronic signatures carry the same legal weight as handwritten signatures across all U.S. states. They are used by businesses, legal professionals, HR departments, and individuals to execute contracts, agreements, consent forms, and other legally binding documents without printing, scanning, or mailing."
+      ],
+      "bullets": []
+    },
+    {
+      "id": "why_should_you_box",
+      "heading": "Why Electronic Signatures Have Become the Standard",
+      "paragraphs": [
+        "Electronic signatures reduce document turnaround time from days to minutes, eliminate printing and postage costs, and provide a verifiable audit trail. They are enforceable under U.S. federal and state law and accepted by courts, financial institutions, and government agencies."
+      ],
+      "bullets": []
+    },
+    {
+      "id": "who_uses_checkmarks_blue",
+      "heading": "Who Relies on Electronic Signatures",
+      "paragraphs": [
+        "[INTRO] Electronic signatures are used across industries wherever documents require an authorized signature.",
+        "[OUTRO] Any organization or individual that regularly executes agreements, consents, or authorizations can reduce processing time and cost with eSignature tools."
+      ],
+      "bullets": [
+        "Legal professionals signing contracts, NDAs, and settlement agreements",
+        "HR teams processing offer letters, onboarding forms, and policy acknowledgments",
+        "Real estate agents and brokers managing purchase agreements and disclosures"
+      ]
+    },
+    {
+      "id": "key_features_6_cards",
+      "heading": "Core Capabilities of a Modern eSignature Platform",
+      "paragraphs": [
+        "A professional eSignature solution provides more than a basic signing field — it supports the full document lifecycle."
+      ],
+      "bullets": [
+        {"label": "Legally Binding Signatures", "text": "Signatures comply with the ESIGN Act, UETA, and eIDAS, ensuring enforceability in the U.S. and internationally."},
+        {"label": "Audit Trail", "text": "Every action — view, sign, decline — is timestamped and logged, providing a tamper-evident record for compliance and dispute resolution."},
+        {"label": "Multi-Party Signing", "text": "Route documents to multiple signers in a defined sequence or simultaneously, with automated reminders for pending recipients."},
+        {"label": "Template Library", "text": "Save frequently used documents as reusable templates to reduce preparation time and maintain formatting consistency."},
+        {"label": "Cloud Storage Integration", "text": "Connect to Google Drive, Dropbox, OneDrive, or Box to import and export documents without leaving the platform."},
+        {"label": "HIPAA Compliance", "text": "Business Associate Agreements and encryption controls meet HIPAA requirements for healthcare organizations handling protected health information."}
+      ]
+    },
+    {
+      "id": "step_guide_vertical",
+      "heading": "How to Sign a Document Online — Step by Step",
+      "paragraphs": [
+        "Signing a document electronically takes under five minutes with a properly configured eSignature platform."
+      ],
+      "bullets": [
+        {"label": "Upload your document", "text": "Import a PDF, DOCX, or image file from your device or connected cloud storage."},
+        {"label": "Place signature fields", "text": "Drag and drop signature, date, and text fields to the required locations in the document."},
+        {"label": "Sign or invite signers", "text": "Apply your own signature or send the document to one or more recipients via email with a secure signing link."},
+        {"label": "Download the executed copy", "text": "Once all parties have signed, download the certified PDF with the embedded audit trail."}
+      ]
+    },
+    {
+      "id": "security_data_green",
+      "heading": "Security and Compliance Standards",
+      "paragraphs": [],
+      "bullets": [
+        {"label": "Encryption", "text": "256-bit AES at rest and TLS 1.2+ in transit"},
+        {"label": "ESIGN Act", "text": "U.S. federal compliance, all document types"},
+        {"label": "UETA", "text": "Adopted by 49 states and Washington D.C."},
+        {"label": "HIPAA", "text": "BAA available for healthcare organizations"},
+        {"label": "SOC 2 Type II", "text": "Annual third-party security audit"},
+        {"label": "eIDAS", "text": "EU electronic signature regulation compliance"}
+      ]
+    },
+    {
+      "id": "pricing_comparison_table",
+      "heading": "eSignature Platform Pricing Comparison",
+      "paragraphs": [
+        "Pricing reflects publicly available plans as of Q1 2026. All figures are per user per month on annual billing."
+      ],
+      "bullets": [
+        {"label": "Plan / Feature", "text": "signNow (Recommended) | DocuSign | Adobe Sign | PandaDoc | HelloSign"},
+        {"label": "Starting Price",  "text": "$8/user/mo | $15/user/mo | $14/user/mo | $19/user/mo | $15/user/mo"},
+        {"label": "Free Trial",      "text": "30-day trial | 30-day trial | 30-day trial | 14-day trial | 30-day trial"},
+        {"label": "Bulk Send",       "text": "Yes | Yes | Yes | Yes | No"},
+        {"label": "Audit Trail",     "text": "Yes | Yes | Yes | Yes | Yes"},
+        {"label": "HIPAA Compliant", "text": "Yes | Yes | Yes | No | No"}
+      ]
+    },
+    {
+      "id": "roi_stats_banner",
+      "heading": "Measurable Impact of eSignature Adoption",
+      "paragraphs": [
+        "Organizations that switch from paper-based signing to electronic signatures report consistent gains in speed, accuracy, and cost efficiency."
+      ],
+      "bullets": [
+        {"label": "Signing Speed",   "text": "Average document turnaround drops from 5 business days to under 24 hours when using eSignature platforms."},
+        {"label": "Error Reduction", "text": "Digital guided fields reduce incomplete or incorrect form submissions by up to 40% compared to handwritten versions."},
+        {"label": "Cost Savings",    "text": "Organizations save an average of $20 per document by eliminating printing, courier, and physical storage costs."}
+      ]
+    },
+    {
+      "id": "challenges_orange_bullets",
+      "heading": "Common Mistakes When Implementing eSignatures",
+      "paragraphs": [],
+      "bullets": [
+        "Using a platform that lacks a verifiable audit trail, which can render signatures unenforceable in legal disputes requiring proof of intent and consent.",
+        "Failing to obtain documented consent from signers to use electronic records, a requirement under both ESIGN and UETA before any electronic transaction is valid.",
+        "Sending documents to signers in a format they cannot open or sign on their device, causing delays and forcing fallback to paper-based alternatives.",
+        "Storing executed documents without a defined retention policy, leading to compliance gaps under IRS, HIPAA, or state-specific recordkeeping requirements."
+      ]
+    },
+    {
+      "id": "troubleshooting_accordion",
+      "heading": "Frequently Asked Questions About Electronic Signatures",
+      "paragraphs": [
+        "These questions address common concerns about the legal validity, security, and practical use of electronic signatures."
+      ],
+      "bullets": [
+        {
+          "label": "Is an electronic signature legally binding in the U.S.?",
+          "text": "Yes. The ESIGN Act of 2000 and UETA establish that electronic signatures are legally equivalent to handwritten signatures for most document types, provided the signer demonstrated intent to sign and consent to use electronic methods. Certain documents — such as wills, codicils, and specific court orders — are excluded."
+        },
+        {
+          "label": "What is required to make an eSignature valid?",
+          "text": "A valid eSignature requires three elements under ESIGN and UETA: intent to sign, consent to conduct the transaction electronically, and an association of the signature with the signed record. A reliable audit trail documenting these elements is essential for enforceability."
+        },
+        {
+          "label": "Can electronic signatures be used for government forms?",
+          "text": "Many federal and state agencies accept electronic signatures. The IRS accepts e-signatures on most forms. However, some agencies maintain paper-only requirements for specific filings. Always verify the agency's current policy before submitting a signed form electronically."
+        },
+        {
+          "label": "How is an electronic signature different from a digital signature?",
+          "text": "An electronic signature is a broad legal concept — any electronic indication of intent to sign. A digital signature is a specific technical implementation using public-key cryptography to verify the signer's identity. Digital signatures are a subset of electronic signatures and provide a higher level of authentication."
+        },
+        {
+          "label": "What happens if a signer refuses to use electronic signing?",
+          "text": "Under ESIGN, consent to electronic transactions must be voluntary. If a party declines to sign electronically, you must provide a paper alternative. Platforms typically allow you to download and print the document for wet-ink signing in these cases."
+        },
+        {
+          "label": "How long should signed documents be retained?",
+          "text": "Retention periods vary by document type and jurisdiction. General business contracts should be retained for at least 7 years after expiration. Tax-related documents require a minimum of 3 years per IRS guidelines. HIPAA-covered records must be retained for 6 years from creation or last effective date."
+        }
+      ]
+    }
+  ]
+}
