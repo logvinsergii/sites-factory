@@ -528,6 +528,209 @@
     </div>
   </section>
 
+
+<!-- ═══ PDF Signing Flow Simulator ═══ -->
+<section class="tool-section">
+<div class="tool-wrap">
+  <div class="tool-header">
+    <span class="tool-lbl">Free Tool</span>
+    <h2 class="tool-title">Online Document Signing Simulator</h2>
+    <p class="tool-sub">Experience the signing flow — select a template, fill in your details, and sign. No account needed.</p>
+  </div>
+
+  <!-- Step 1: Template picker -->
+  <div class="sim-step" id="step-1">
+    <p class="sim-step-label">Step 1 — Choose a document template</p>
+    <div class="tpl-grid">
+      <button class="tpl-card" onclick="selectTemplate('NDA','Non-Disclosure Agreement','This Non-Disclosure Agreement is entered into between the parties listed below. Each party agrees to keep confidential all proprietary information shared during the course of their business relationship. This includes trade secrets, financial data, customer lists, and any other sensitive information. Breach of this agreement may result in legal action.')">
+        <div class="tpl-icon">🔒</div>
+        <div class="tpl-name">NDA</div>
+        <div class="tpl-desc">Non-Disclosure Agreement</div>
+      </button>
+      <button class="tpl-card" onclick="selectTemplate('SERVICE','Service Agreement','This Service Agreement is made between the Client and the Service Provider. The Provider agrees to deliver the services described herein in a professional manner. Payment terms, deliverables, and timelines are outlined in Schedule A. Either party may terminate this agreement with 30 days written notice.')">
+        <div class="tpl-icon">📋</div>
+        <div class="tpl-name">Service</div>
+        <div class="tpl-desc">Service Agreement</div>
+      </button>
+      <button class="tpl-card" onclick="selectTemplate('LEASE','Lease Agreement','This Lease Agreement is entered into between the Landlord and Tenant for the property described below. The lease term begins on the date signed and continues for the period specified. Tenant agrees to pay rent on the first of each month and maintain the property in good condition.')">
+        <div class="tpl-icon">🏠</div>
+        <div class="tpl-name">Lease</div>
+        <div class="tpl-desc">Lease Agreement</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 2: Document preview + fields -->
+  <div class="sim-step hidden" id="step-2">
+    <p class="sim-step-label">Step 2 — Review and fill in your details</p>
+    <div class="doc-preview">
+      <div class="doc-header">
+        <div class="doc-title-row">
+          <span class="doc-badge" id="doc-badge">NDA</span>
+          <span class="doc-title-text" id="doc-title-text">Non-Disclosure Agreement</span>
+        </div>
+        <div class="doc-meta">Document #<span id="doc-number"></span> · <span id="doc-date"></span></div>
+      </div>
+      <div class="doc-body" id="doc-body"></div>
+      <div class="doc-fields">
+        <div class="field-row">
+          <label class="field-label">Full Name</label>
+          <input class="field-input" id="f-name" type="text" placeholder="Enter your full name">
+        </div>
+        <div class="field-row">
+          <label class="field-label">Email</label>
+          <input class="field-input" id="f-email" type="email" placeholder="your@email.com">
+        </div>
+        <div class="field-row">
+          <label class="field-label">Date</label>
+          <input class="field-input" id="f-date" type="text" readonly>
+        </div>
+        <div class="field-row">
+          <label class="field-label">Signature</label>
+          <div class="sig-box" id="sig-box">
+            <canvas id="sig-canvas" width="400" height="80"></canvas>
+            <div class="sig-placeholder" id="sig-placeholder">Click to sign</div>
+            <button class="sig-clear" id="sig-clear" onclick="clearSig()" style="display:none">Clear</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn-sign" onclick="doSign()">Sign Document →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Signed confirmation + audit trail -->
+  <div class="sim-step hidden" id="step-3">
+    <p class="sim-step-label">Step 3 — Document signed successfully</p>
+    <div class="signed-card">
+      <div class="signed-badge">✓ Signed</div>
+      <div class="signed-title" id="signed-title"></div>
+      <div class="audit-trail">
+        <div class="audit-header">Audit Trail</div>
+        <div class="audit-row"><span class="audit-key">Signer</span><span class="audit-val" id="a-name"></span></div>
+        <div class="audit-row"><span class="audit-key">Email</span><span class="audit-val" id="a-email"></span></div>
+        <div class="audit-row"><span class="audit-key">Timestamp</span><span class="audit-val" id="a-ts"></span></div>
+        <div class="audit-row"><span class="audit-key">IP Address</span><span class="audit-val" id="a-ip">192.168.x.x (simulated)</span></div>
+        <div class="audit-row"><span class="audit-key">Document Hash</span><span class="audit-val" id="a-hash"></span></div>
+        <div class="audit-row"><span class="audit-key">Status</span><span class="audit-val audit-green">Legally binding · ESIGN/UETA compliant</span></div>
+      </div>
+      <button class="btn-restart" onclick="restart()">Try Another Document</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<style>
+.tool-section{background:var(--bg-alt,#111);padding:64px 0;border-top:1px solid var(--border,#222);border-bottom:1px solid var(--border,#222)}
+.tool-wrap{max-width:760px;margin:0 auto;padding:0 24px}
+.tool-lbl{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent,#f0a500);display:block;margin-bottom:10px}
+.tool-title{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--text,#fff);margin:0 0 10px}
+.tool-sub{color:var(--text-soft,#888);font-size:.95rem;margin:0 0 36px;line-height:1.6}
+.sim-step-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent,#f0a500);margin-bottom:16px}
+.tpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tpl-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:24px 16px;cursor:pointer;text-align:center;transition:border-color .2s,transform .2s;color:var(--text,#fff)}
+.tpl-card:hover{border-color:var(--accent,#f0a500);transform:translateY(-2px)}
+.tpl-icon{font-size:1.8rem;margin-bottom:8px}
+.tpl-name{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.tpl-desc{font-size:.78rem;color:var(--text-soft,#888)}
+.hidden{display:none!important}
+.doc-preview{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden}
+.doc-header{background:#111;padding:20px 24px;border-bottom:1px solid #2a2a2a}
+.doc-title-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.doc-badge{background:var(--accent,#f0a500);color:#000;font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:4px;letter-spacing:.08em}
+.doc-title-text{font-weight:700;font-size:1rem;color:var(--text,#fff)}
+.doc-meta{font-size:.75rem;color:var(--text-soft,#888)}
+.doc-body{padding:24px;font-size:.85rem;color:#aaa;line-height:1.7;border-bottom:1px solid #2a2a2a}
+.doc-fields{padding:24px;display:flex;flex-direction:column;gap:16px}
+.field-row{display:flex;flex-direction:column;gap:6px}
+.field-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft,#888)}
+.field-input{background:#111;border:1px solid #333;border-radius:6px;padding:10px 14px;color:var(--text,#fff);font-size:.9rem;outline:none;transition:border-color .2s}
+.field-input:focus{border-color:var(--accent,#f0a500)}
+.sig-box{position:relative;background:#111;border:1px solid #333;border-radius:6px;height:90px;cursor:crosshair;overflow:hidden}
+.sig-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#444;font-size:.85rem;pointer-events:none}
+#sig-canvas{position:absolute;inset:0;width:100%;height:100%}
+.sig-clear{position:absolute;top:6px;right:8px;background:#222;border:1px solid #444;color:#aaa;font-size:.7rem;padding:3px 8px;border-radius:4px;cursor:pointer}
+.btn-sign{display:block;width:calc(100% - 48px);margin:0 24px 24px;background:var(--accent,#f0a500);color:#000;font-weight:700;font-size:.95rem;padding:14px;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s}
+.btn-sign:hover{opacity:.85}
+.signed-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:32px}
+.signed-badge{display:inline-flex;align-items:center;gap:6px;background:#0d2e1a;color:#4ade80;font-size:.8rem;font-weight:700;padding:6px 14px;border-radius:20px;margin-bottom:16px;border:1px solid #166534}
+.signed-title{font-size:1.1rem;font-weight:700;color:var(--text,#fff);margin-bottom:24px}
+.audit-trail{background:#111;border-radius:8px;overflow:hidden;margin-bottom:24px}
+.audit-header{background:#0d2e1a;color:#4ade80;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px}
+.audit-row{display:flex;justify-content:space-between;padding:10px 16px;border-top:1px solid #1a1a1a;font-size:.82rem}
+.audit-key{color:#666;font-weight:600}
+.audit-val{color:#ccc;text-align:right;max-width:60%;word-break:break-all}
+.audit-green{color:#4ade80!important}
+.btn-restart{background:transparent;border:1px solid #333;color:#aaa;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:.85rem;transition:border-color .2s}
+.btn-restart:hover{border-color:var(--accent,#f0a500);color:var(--accent,#f0a500)}
+@media(max-width:600px){.tpl-grid{grid-template-columns:1fr}}
+</style>
+
+<script>
+(function(){
+  var canvas=document.getElementById('sig-canvas');
+  var ctx=canvas.getContext('2d');
+  var drawing=false;
+  var hasSig=false;
+  var currentTpl='';
+
+  function resizeCanvas(){
+    var box=document.getElementById('sig-box');
+    canvas.width=box.offsetWidth;
+    canvas.height=box.offsetHeight;
+  }
+
+  function selectTemplate(id,title,body){
+    currentTpl=title;
+    document.getElementById('doc-badge').textContent=id;
+    document.getElementById('doc-title-text').textContent=title;
+    document.getElementById('doc-number').textContent=Math.floor(Math.random()*90000+10000);
+    var now=new Date();
+    document.getElementById('doc-date').textContent=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('f-date').value=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('doc-body').textContent=body;
+    document.getElementById('step-1').classList.add('hidden');
+    document.getElementById('step-2').classList.remove('hidden');
+    setTimeout(resizeCanvas,50);
+  }
+  window.selectTemplate=selectTemplate;
+
+  canvas.addEventListener('mousedown',function(e){drawing=true;ctx.beginPath();ctx.moveTo(e.offsetX,e.offsetY);});
+  canvas.addEventListener('mousemove',function(e){if(!drawing)return;ctx.lineTo(e.offsetX,e.offsetY);ctx.strokeStyle='#f0a500';ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke();hasSig=true;document.getElementById('sig-placeholder').style.display='none';document.getElementById('sig-clear').style.display='block';});
+  canvas.addEventListener('mouseup',function(){drawing=false;});
+  canvas.addEventListener('mouseleave',function(){drawing=false;});
+  canvas.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;var t=e.touches[0];var r=canvas.getBoundingClientRect();ctx.beginPath();ctx.moveTo(t.clientX-r.left,t.clientY-r.top);},{passive:false});
+  canvas.addEventListener('touchmove',function(e){e.preventDefault();if(!drawing)return;var t=e.touches[0];var r=canvas.getBoundingClientRect();ctx.lineTo(t.clientX-r.left,t.clientY-r.top);ctx.strokeStyle='#f0a500';ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke();hasSig=true;document.getElementById('sig-placeholder').style.display='none';document.getElementById('sig-clear').style.display='block';},{passive:false});
+  canvas.addEventListener('touchend',function(){drawing=false;});
+
+  window.clearSig=function(){ctx.clearRect(0,0,canvas.width,canvas.height);hasSig=false;document.getElementById('sig-placeholder').style.display='flex';document.getElementById('sig-clear').style.display='none';};
+
+  window.doSign=function(){
+    var name=document.getElementById('f-name').value.trim();
+    var email=document.getElementById('f-email').value.trim();
+    if(!name){alert('Please enter your full name.');return;}
+    if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+    if(!hasSig){alert('Please draw your signature.');return;}
+    document.getElementById('signed-title').textContent=currentTpl;
+    document.getElementById('a-name').textContent=name;
+    document.getElementById('a-email').textContent=email;
+    var now=new Date();
+    document.getElementById('a-ts').textContent=now.toUTCString();
+    document.getElementById('a-hash').textContent='SHA256:'+btoa(name+email+now.toISOString()).replace(/[^a-zA-Z0-9]/g,'').substring(0,32).toLowerCase();
+    document.getElementById('step-2').classList.add('hidden');
+    document.getElementById('step-3').classList.remove('hidden');
+  };
+
+  window.restart=function(){
+    document.getElementById('step-3').classList.add('hidden');
+    document.getElementById('step-1').classList.remove('hidden');
+    document.getElementById('f-name').value='';
+    document.getElementById('f-email').value='';
+    window.clearSig();
+    hasSig=false;
+  };
+})();
+</script>
+
   <!-- ── Content Sections ── -->
   <main id="learn-more">
   {% for section in content.sections %}
