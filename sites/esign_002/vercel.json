@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "bash build.sh",
-  "outputDirectory": "sites/esign_002/output",
+  "buildCommand": null,
+  "outputDirectory": "output",
   "installCommand": "echo skip",
   "framework": null,
   "routes": [
