@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Signature Generator — Draw or Type & Download PNG</title>
+  <meta name="description" content="Create a free digital signature online. Draw with your mouse or type your name in elegant fonts. Download as transparent PNG instantly. No signup required.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://signature-gen.vercel.app/">
+  <link rel="alternate" hreflang="en" href="https://signature-gen.vercel.app/">
+  <link rel="alternate" hreflang="x-default" href="https://signature-gen.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Online Signature Generator">
+  <meta property="og:description" content="Draw or type your signature. Download as transparent PNG. Free, instant, no signup.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://signature-gen.vercel.app/#webpage","url":"https://signature-gen.vercel.app/","name":"Free Online Signature Generator","inLanguage":"en","datePublished":"2025-04-15T10:00:00Z","dateModified":"2025-04-15T10:00:00Z"},{"@type":"SoftwareApplication","@id":"https://signature-gen.vercel.app/#product","name":"SignatureGen","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":4.8,"ratingCount":2341}},{"@type":"FAQPage","@id":"https://signature-gen.vercel.app/#faq","mainEntity":[{"@type":"Question","name":"Is SignatureGen free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No account, no watermarks, no limits."}},{"@type":"Question","name":"Is my signature stored?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser. Nothing is sent to a server."}}]}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Dancing+Script:wght@400;600;700&family=Great+Vibes&family=Pinyon+Script&family=Allura&family=Alex+Brush&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f8f9fc;--surface:#fff;--border:#e5e7ef;--border-2:#d0d3e0;--text:#111827;--text-2:#4b5563;--text-3:#9ca3af;--blue:#2563eb;--blue-h:#1d4ed8;--blue-s:#eff6ff;--blue-m:#dbeafe;--green:#16a34a;--green-s:#f0fdf4;--r:6px;--rl:12px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+    .nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .nav-in{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .nav-brand{font-size:1.1rem;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
+    .nav-icon{width:30px;height:30px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem}
+    .nav-r{display:flex;align-items:center;gap:12px}
+    .badge{background:var(--green-s);color:var(--green);font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid #bbf7d0}
+    .nav-cta{background:var(--blue);color:#fff;padding:8px 18px;border-radius:var(--r);font-size:.875rem;font-weight:500;text-decoration:none;transition:background .15s}
+    .nav-cta:hover{background:var(--blue-h)}
+    .hero{background:var(--surface);border-bottom:1px solid var(--border);padding:52px 24px 44px;text-align:center}
+    .hero-rating{display:inline-flex;align-items:center;gap:6px;background:var(--blue-s);border:1px solid var(--blue-m);border-radius:100px;padding:5px 14px;font-size:.75rem;font-weight:500;color:var(--blue);margin-bottom:18px}
+    .stars{color:#f59e0b}
+    h1{font-size:clamp(1.75rem,4.5vw,2.75rem);font-weight:700;line-height:1.2;margin-bottom:12px}
+    h1 span{color:var(--blue)}
+    .hero-sub{font-size:1rem;color:var(--text-2);max-width:520px;margin:0 auto 28px;line-height:1.65}
+    .chips{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:.8rem;color:var(--text-3)}
+    .chip{display:flex;align-items:center;gap:6px}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+    .tool-wrap{max-width:840px;margin:0 auto;padding:36px 24px 56px}
+    .tool-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12);overflow:hidden}
+    .tabs{display:flex;background:var(--bg);border-bottom:1px solid var(--border);padding:6px 6px 0;gap:2px}
+    .tab{flex:1;padding:11px 16px;background:none;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;font-weight:500;color:var(--text-3);border-radius:var(--r) var(--r) 0 0;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+    .tab svg{width:15px;height:15px}
+    .tab.active{background:var(--surface);color:var(--blue);border:1px solid var(--border);border-bottom:1px solid var(--surface);position:relative;bottom:-1px}
+    .tab:hover:not(.active){color:var(--text-2);background:var(--border)}
+    .panel{display:none}
+    .panel.active{display:block}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+    .tg{display:flex;align-items:center;gap:12px}
+    .tlabel{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+    .colors{display:flex;gap:6px}
+    .cbtn{width:24px;height:24px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:transform .12s;outline:none}
+    .cbtn:hover{transform:scale(1.15)}
+    .cbtn.active{border-color:var(--blue);box-shadow:0 0 0 2px #fff,0 0 0 4px var(--blue)}
+    .widths{display:flex;gap:6px}
+    .wbtn{width:34px;height:34px;border-radius:var(--r);border:1.5px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+    .wbtn.active{border-color:var(--blue);background:var(--blue-s)}
+    .wbtn:hover:not(.active){border-color:var(--border-2)}
+    .canvas-area{position:relative;background:#fff;cursor:crosshair}
+    .cph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;pointer-events:none;transition:opacity .2s}
+    .cph-icon{font-size:2rem;opacity:.2}
+    .cph-text{font-size:.9rem;color:var(--text-3)}
+    canvas{display:block;width:100%;touch-action:none}
+    .cbar{display:flex;align-items:center;justify-content:flex-end;padding:10px 20px;border-top:1px solid var(--border);background:var(--bg)}
+    .btn-ghost{background:none;border:1px solid var(--border);padding:7px 16px;border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:500;color:var(--text-2);cursor:pointer;transition:all .12s}
+    .btn-ghost:hover{border-color:var(--border-2);color:var(--text)}
+    .type-panel{padding:20px}
+    .type-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;margin-bottom:16px}
+    .type-input:focus{border-color:var(--blue)}
+    .type-input::placeholder{color:var(--text-3)}
+    .font-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:16px}
+    .fc{border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all .12s;background:var(--surface)}
+    .fc:hover{border-color:var(--border-2)}
+    .fc.active{border-color:var(--blue);background:var(--blue-s)}
+    .fp{font-size:1.6rem;line-height:1.2;color:var(--text);margin-bottom:4px}
+    .fn{font-size:.7rem;font-weight:600;color:var(--text-3);letter-spacing:.04em;text-transform:uppercase}
+    .tprev{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);min-height:110px;display:flex;align-items:center;justify-content:center;padding:16px}
+    .tprev-text{font-size:2.8rem;color:#111827;text-align:center;word-break:break-word;line-height:1.2;transition:font-family .15s}
+    .tprev-ph{font-size:.875rem;color:var(--text-3)}
+    .dl-bar{padding:16px 20px;border-top:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .dl-meta{font-size:.8rem;color:var(--text-3)}
+    .dl-meta span{color:var(--text-2);font-weight:500}
+    .btn-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:11px 24px;border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;font-weight:600;border:none;cursor:pointer;transition:background .15s}
+    .btn-dl:hover{background:var(--blue-h)}
+    .btn-dl svg{width:16px;height:16px}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+    .sec{padding:60px 0}
+    .sec-alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .sec-lbl{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+    h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--text);margin-bottom:10px}
+    .sec-sub{font-size:.95rem;color:var(--text-2);max-width:580px;margin-bottom:36px;line-height:1.7}
+    .steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}
+    .step{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:22px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .snum{width:34px;height:34px;border-radius:9px;background:var(--blue-s);color:var(--blue);font-size:.875rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .stitle{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:6px}
+    .stext{font-size:.84rem;color:var(--text-2);line-height:1.6}
+    .ucases{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:16px}
+    .uc{background:var(--bg);border:1px solid var(--border);border-radius:var(--rl);padding:22px}
+    .uci{font-size:1.5rem;margin-bottom:10px}
+    .uct{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:5px}
+    .ucp{font-size:.84rem;color:var(--text-2);line-height:1.6}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .stat{background:var(--blue-s);border:1px solid var(--blue-m);border-radius:var(--rl);padding:24px;text-align:center}
+    .stn{font-size:2.3rem;font-weight:700;color:var(--blue);line-height:1;margin-bottom:6px}
+    .stt{font-size:.82rem;color:var(--text-2);line-height:1.5}
+    .legal{background:#fffbeb;border:1px solid #fde68a;border-radius:var(--r);padding:18px 20px;font-size:.84rem;color:#92400e;line-height:1.65;margin-top:28px}
+    .legal strong{color:#78350f}
+    .faq{display:flex;flex-direction:column}
+    .fqi{border-bottom:1px solid var(--border)}
+    .fqb{width:100%;text-align:left;padding:18px 0;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--text)}
+    .fqi-icon{width:22px;height:22px;border-radius:50%;background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--text-3);flex-shrink:0;transition:all .15s}
+    .fqb.open .fqi-icon{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg)}
+    .fqbody{max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .fqbody.open{max-height:200px}
+    .fqbody p{padding:0 0 18px;font-size:.875rem;color:var(--text-2);line-height:1.7}
+    .footer{border-top:1px solid var(--border);background:var(--surface);padding:32px 24px}
+    .footer-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .footer-brand{font-size:.95rem;font-weight:600;color:var(--text)}
+    .footer-note{font-size:.8rem;color:var(--text-3)}
+    @media(max-width:640px){.stats{grid-template-columns:1fr}.hero{padding:36px 20px 28px}.dl-bar{flex-direction:column;align-items:stretch}.btn-dl{justify-content:center}}
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in"><a href="/" class="nav-brand"><div class="nav-icon">✦</div>SignatureGen</a><div class="nav-r"><span class="badge">✓ Free · No signup</span><a href="#tool" class="nav-cta">Create Signature</a></div></div></nav>
+
+<section class="hero">
+  <div class="hero-rating"><span class="stars">★★★★★</span> Rated 4.8 by 2,341 users</div>
+  <h1>Free Online <span>Signature Generator</span></h1>
+  <p class="hero-sub">Draw with your mouse or type your name in a professional script font. Download as a transparent PNG — free, instant, no account needed.</p>
+  <div class="chips">
+    <div class="chip"><div class="dot"></div>No watermark</div>
+    <div class="chip"><div class="dot"></div>Transparent PNG</div>
+    <div class="chip"><div class="dot"></div>Works on any device</div>
+    <div class="chip"><div class="dot"></div>Private — nothing sent to servers</div>
+  </div>
+</section>
+
+<div class="tool-wrap" id="tool">
+  <div class="tool-box">
+    <div class="tabs">
+      <button class="tab active" data-tab="draw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Draw Signature
+      </button>
+      <button class="tab" data-tab="type">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        Type Signature
+      </button>
+    </div>
+
+    <div class="panel active" id="panel-draw">
+      <div class="toolbar">
+        <div class="tg">
+          <span class="tlabel">Color</span>
+          <div class="colors">
+            <button class="cbtn active" style="background:#111827" data-color="#111827" title="Black"></button>
+            <button class="cbtn" style="background:#1e40af" data-color="#1e40af" title="Navy"></button>
+            <button class="cbtn" style="background:#7c3aed" data-color="#7c3aed" title="Violet"></button>
+            <button class="cbtn" style="background:#b91c1c" data-color="#b91c1c" title="Red"></button>
+          </div>
+        </div>
+        <div class="tg">
+          <span class="tlabel">Thickness</span>
+          <div class="widths">
+            <button class="wbtn" data-w="1.5" title="Thin"><svg viewBox="0 0 28 28" width="28" height="28"><line x1="4" y1="14" x2="24" y2="14" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+            <button class="wbtn active" data-w="2.8" title="Normal"><svg viewBox="0 0 28 28" width="28" height="28"><line x1="4" y1="14" x2="24" y2="14" stroke="#111" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <button class="wbtn" data-w="4.5" title="Bold"><svg viewBox="0 0 28 28" width="28" height="28"><line x1="4" y1="14" x2="24" y2="14" stroke="#111" stroke-width="3.8" stroke-linecap="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="canvas-area" id="ca">
+        <div class="cph" id="cph"><div class="cph-icon">✍️</div><div class="cph-text">Draw your signature here using your mouse or trackpad</div></div>
+        <canvas id="sig-canvas" height="220"></canvas>
+      </div>
+      <div class="cbar"><button class="btn-ghost" id="btn-clear">Clear canvas</button></div>
+    </div>
+
+    <div class="panel type-panel" id="panel-type">
+      <input type="text" class="type-input" id="type-input" placeholder="Type your full name or initials…" maxlength="40">
+      <div class="font-grid">
+        <div class="fc active" data-font="'Dancing Script',cursive"><div class="fp" style="font-family:'Dancing Script',cursive">Signature</div><div class="fn">Dancing Script</div></div>
+        <div class="fc" data-font="'Great Vibes',cursive"><div class="fp" style="font-family:'Great Vibes',cursive">Signature</div><div class="fn">Great Vibes</div></div>
+        <div class="fc" data-font="'Pinyon Script',cursive"><div class="fp" style="font-family:'Pinyon Script',cursive">Signature</div><div class="fn">Pinyon Script</div></div>
+        <div class="fc" data-font="'Allura',cursive"><div class="fp" style="font-family:'Allura',cursive">Signature</div><div class="fn">Allura</div></div>
+        <div class="fc" data-font="'Alex Brush',cursive"><div class="fp" style="font-family:'Alex Brush',cursive">Signature</div><div class="fn">Alex Brush</div></div>
+      </div>
+      <div class="tprev"><span class="tprev-ph" id="tph">Your signature preview will appear here</span><div class="tprev-text" id="tdisplay" style="display:none;font-family:'Dancing Script',cursive"></div></div>
+    </div>
+
+    <div class="dl-bar">
+      <div class="dl-meta">Format: <span>PNG · Transparent background</span> · High resolution · No watermark</div>
+      <button class="btn-dl" id="btn-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download PNG</button>
+    </div>
+  </div>
+</div>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-lbl">How it works</div>
+    <h2>Create Your Signature in 4 Simple Steps</h2>
+    <p class="sec-sub">No software to install. Everything runs directly in your browser in seconds.</p>
+    <div class="steps">
+      <div class="step"><div class="snum">1</div><div class="stitle">Choose Draw or Type</div><div class="stext">Select Draw to create a freehand signature with your mouse or touchscreen, or Type to use a professional calligraphy font.</div></div>
+      <div class="step"><div class="snum">2</div><div class="stitle">Create your signature</div><div class="stext">Draw naturally on the canvas or type your name and choose from five handcrafted script fonts until you find your style.</div></div>
+      <div class="step"><div class="snum">3</div><div class="stitle">Adjust settings</div><div class="stext">Choose ink color and stroke thickness for drawn signatures, or select your preferred font style for typed ones.</div></div>
+      <div class="step"><div class="snum">4</div><div class="stitle">Download your PNG</div><div class="stext">Click Download PNG to save a high-resolution transparent image ready for any document, email, or PDF.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-lbl">Use cases</div>
+    <h2>Where People Use a Digital Signature Image</h2>
+    <p class="sec-sub">A transparent PNG signature is versatile across personal and professional contexts.</p>
+    <div class="ucases">
+      <div class="uc"><div class="uci">📄</div><div class="uct">PDF Documents</div><div class="ucp">Insert your signature into PDFs using Adobe Acrobat, Preview on Mac, or any PDF editor for contracts and approvals.</div></div>
+      <div class="uc"><div class="uci">✉️</div><div class="uct">Email Signatures</div><div class="ucp">Add a personal touch to emails by embedding your handwritten signature in Gmail, Outlook, or Apple Mail footers.</div></div>
+      <div class="uc"><div class="uci">🎨</div><div class="uct">Digital Art & Design</div><div class="ucp">Artists and designers watermark their work with a personal signature without obstructing the composition.</div></div>
+      <div class="uc"><div class="uci">📋</div><div class="uct">Internal Forms</div><div class="ucp">Many HR and administrative forms accept an inserted signature image for routine acknowledgments and timesheets.</div></div>
+    </div>
+    <div class="legal"><strong>⚠️ Legal note:</strong> A PNG image of your signature is not a legally binding electronic signature under the ESIGN Act or UETA on its own. For enforceable contracts, use a dedicated eSignature platform (signNow, DocuSign, Adobe Sign) that captures intent, consent, and provides a verifiable audit trail.</div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-lbl">By the numbers</div>
+    <h2>Why Signature Generation Has Gone Digital</h2>
+    <p class="sec-sub">Digital signature adoption has accelerated dramatically since the expansion of remote work and paperless workflows.</p>
+    <div class="stats">
+      <div class="stat"><div class="stn">80%</div><div class="stt">of businesses have reduced paper-based signing since 2020, per DocuSign industry data</div></div>
+      <div class="stat"><div class="stn">5×</div><div class="stt">faster document turnaround when using digital signature workflows vs. wet-ink signing</div></div>
+      <div class="stat"><div class="stn">$20</div><div class="stt">average savings per document by eliminating print, scan, and courier costs</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="wrap" style="max-width:720px">
+    <div class="sec-lbl">FAQ</div>
+    <h2>Frequently Asked Questions</h2>
+    <p class="sec-sub">Common questions about online signature generation, formats, and privacy.</p>
+    <div class="faq">
+      <div class="fqi"><button class="fqb" data-i="0">Is SignatureGen completely free?<div class="fqi-icon">+</div></button><div class="fqbody" id="fq0"><p>Yes. SignatureGen is free with no account required, no watermarks on downloads, and no usage limits. Everything runs in your browser — no data is ever sent to a server.</p></div></div>
+      <div class="fqi"><button class="fqb" data-i="1">Is my signature stored or tracked?<div class="fqi-icon">+</div></button><div class="fqbody" id="fq1"><p>No. Your signature is generated entirely within your browser using the HTML5 Canvas API. It is never transmitted to or stored on any server. Once you close the page, the data is gone unless you downloaded it.</p></div></div>
+      <div class="fqi"><button class="fqb" data-i="2">Can I use this for legal documents?<div class="fqi-icon">+</div></button><div class="fqbody" id="fq2"><p>A PNG signature image works for many routine purposes. For legally binding contracts, use a purpose-built eSignature platform that captures intent and consent as required by the ESIGN Act and UETA.</p></div></div>
+      <div class="fqi"><button class="fqb" data-i="3">What is the difference between Draw and Type?<div class="fqi-icon">+</div></button><div class="fqbody" id="fq3"><p>Draw lets you create a freehand signature with your mouse, trackpad, or touchscreen — uniquely personal. Type renders your name in one of five calligraphy fonts, producing a consistent signature for repeated use.</p></div></div>
+      <div class="fqi"><button class="fqb" data-i="4">What resolution is the downloaded PNG?<div class="fqi-icon">+</div></button><div class="fqbody" id="fq4"><p>The canvas renders at 2× display density (retina-ready), producing a sharp PNG that stays crisp when printed at standard document sizes or displayed on high-resolution screens.</p></div></div>
+      <div class="fqi"><button class="fqb" data-i="5">Does it work on iPhone and iPad?<div class="fqi-icon">+</div></button><div class="fqbody" id="fq5"><p>Yes. SignatureGen works on any modern browser including Safari on iOS. Touch drawing is fully supported. For the best experience on mobile, use a stylus or rotate to landscape orientation for a wider canvas.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-in"><div class="footer-brand">✦ SignatureGen</div><div class="footer-note">Free online signature generator · Transparent PNG · No account required · © 2025</div></div></footer>
+
+<script>
+const canvas=document.getElementById('sig-canvas'),ctx=canvas.getContext('2d'),ca=document.getElementById('ca'),cph=document.getElementById('cph');
+let drawing=false,hasDrawn=false,inkColor='#111827',inkWidth=2.8;
+function initC(){const dpr=window.devicePixelRatio||1,w=ca.clientWidth,h=220;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.height=h+'px';ctx.scale(dpr,dpr);ctx.lineCap='round';ctx.lineJoin='round';}
+initC();
+function gxy(e){const r=canvas.getBoundingClientRect();if(e.touches)return{x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};return{x:e.clientX-r.left,y:e.clientY-r.top};}
+canvas.addEventListener('mousedown',e=>{drawing=true;const p=gxy(e);ctx.beginPath();ctx.moveTo(p.x,p.y);if(!hasDrawn){cph.style.opacity='0';hasDrawn=true;}});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=gxy(e);ctx.strokeStyle=inkColor;ctx.lineWidth=inkWidth;ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('mouseup',()=>drawing=false);canvas.addEventListener('mouseleave',()=>drawing=false);
+canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=gxy(e);ctx.beginPath();ctx.moveTo(p.x,p.y);if(!hasDrawn){cph.style.opacity='0';hasDrawn=true;}},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=gxy(e);ctx.strokeStyle=inkColor;ctx.lineWidth=inkWidth;ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);},{passive:false});
+canvas.addEventListener('touchend',()=>drawing=false);
+document.getElementById('btn-clear').addEventListener('click',()=>{ctx.clearRect(0,0,canvas.width,canvas.height);hasDrawn=false;cph.style.opacity='1';});
+document.querySelectorAll('.cbtn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.cbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');inkColor=b.dataset.color;}));
+document.querySelectorAll('.wbtn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.wbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');inkWidth=parseFloat(b.dataset.w);}));
+let activeTab='draw';
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{activeTab=t.dataset.tab;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('panel-'+activeTab).classList.add('active');}));
+let activeFont="'Dancing Script',cursive";
+const tdisplay=document.getElementById('tdisplay'),tph=document.getElementById('tph'),tinput=document.getElementById('type-input');
+tinput.addEventListener('input',()=>{const v=tinput.value.trim();if(v){tph.style.display='none';tdisplay.style.display='block';tdisplay.textContent=v;}else{tph.style.display='block';tdisplay.style.display='none';}});
+document.querySelectorAll('.fc').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.fc').forEach(x=>x.classList.remove('active'));c.classList.add('active');activeFont=c.dataset.font;tdisplay.style.fontFamily=activeFont;}));
+document.getElementById('btn-dl').addEventListener('click',()=>{
+  if(activeTab==='draw'){const l=document.createElement('a');l.download='my-signature.png';l.href=canvas.toDataURL('image/png');l.click();}
+  else{const text=tinput.value.trim();if(!text){alert('Please type your name first.');return;}const dpr=window.devicePixelRatio||1,W=700,H=220,off=document.createElement('canvas');off.width=W*dpr;off.height=H*dpr;const oc=off.getContext('2d');oc.scale(dpr,dpr);const fs=Math.min(120,Math.floor(W*0.85/Math.max(text.length,2)));oc.font=fs+'px '+activeFont;oc.fillStyle=inkColor;oc.textAlign='center';oc.textBaseline='middle';oc.fillText(text,W/2,H/2);const l=document.createElement('a');l.download='my-signature.png';l.href=off.toDataURL('image/png');l.click();}
+});
+document.querySelectorAll('.fqb').forEach(b=>b.addEventListener('click',()=>{const i=b.dataset.i,body=document.getElementById('fq'+i),open=b.classList.contains('open');document.querySelectorAll('.fqb').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.fqbody').forEach(x=>x.classList.remove('open'));if(!open){b.classList.add('open');body.classList.add('open');}}));
+</script>
+</body>
+</html>

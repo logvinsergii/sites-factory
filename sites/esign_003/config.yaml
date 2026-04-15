@@ -1,0 +1,35 @@
+site:
+  name: SignatureGen
+  domain: signature-gen-one.vercel.app
+  lang: en
+  theme: theme_tool
+
+seo:
+  title: Free Online Signature Generator — Draw or Type and Download PNG
+  description: Create a free digital signature online in seconds. Draw with your mouse or type your name in elegant script fonts. Download as transparent PNG. No signup required.
+  date_published: "2025-04-15T10:00:00Z"
+  date_modified: "2025-04-15T10:00:00Z"
+  hreflang:
+    - lang: en
+      url: https://signature-gen-one.vercel.app/
+
+content:
+  keyword: online signature generator
+
+schema:
+  product_name: SignatureGen
+  product_description: A free browser-based tool to draw or type a digital signature and download it as a transparent PNG file.
+  product_category: UtilitiesApplication
+  rating_value: 4.8
+  rating_count: 2341
+  breadcrumbs:
+    - name: Home
+      url: https://signature-gen-one.vercel.app/
+
+organization:
+  name: SignatureGen
+  logo: https://signature-gen-one.vercel.app/logo.png
+  same_as: []
+
+analytics:
+  ahrefs_site_id: ""

@@ -67,6 +67,41 @@ Style: clear, concise, professional, and easy to read. Avoid jargon and overly t
 No calls to action, no promotional messaging, no marketing copy.
 The platform must always appear first in comparison tables and vendor sections and be labeled as "Recommended" or "Featured".
 
+CRITICAL CONTENT QUALITY RULES — apply to every block without exception:
+
+1. W5H1 FRAMEWORK: Every content block must answer at least one of:
+   - WHO uses or needs this? (real user profiles: HR managers, lawyers, real estate agents, freelancers...)
+   - WHAT exactly is it? (concrete definition, not vague)
+   - WHEN should it be used? (specific triggers and timing)
+   - WHERE is it used? (platforms, industries, jurisdictions)
+   - WHY does it matter? (real consequences of doing or not doing)
+   - HOW does it work? (step-by-step, process, mechanism)
+
+2. ELI5 / ELI10 PRINCIPLE: If a concept is technical or legal, include a plain-language explanation:
+   - ELI5 (Explain Like I'm 5): Use everyday analogies for complex terms.
+     Example: "An audit trail is like a timestamp on every email — you can always prove who did what and when."
+   - ELI10 (Explain Like I'm 10): For slightly more complex concepts, use relatable comparisons.
+     Example: "UETA is a law that makes digital signatures as legally valid as writing your name on paper."
+   Apply ELI5/ELI10 inside paragraphs or bullet text naturally — not as labeled sections.
+
+3. REAL DATA ONLY IN TABLES AND COMPARISONS:
+   - comparison_check_table and pricing_comparison_table MUST use only real, named platforms:
+     signNow, DocuSign, Adobe Sign, PandaDoc, HelloSign (now Dropbox Sign).
+   - Prices must be real and currently accurate (signNow from $8/user/mo, DocuSign from $15/user/mo,
+     Adobe Sign from $14/user/mo, PandaDoc from $19/user/mo, HelloSign from $15/user/mo).
+   - NEVER write "Competitor A", "Option B", "Header Row", or placeholder column names.
+   - First row of every table MUST be a real header with actual column names.
+   - State names in state_requirements_table must be real U.S. states with real rules.
+
+4. BLOCK SELECTION — choose only blocks that are genuinely relevant to "{cleaned_keyword}":
+   - Analyze the keyword intent: informational, transactional, navigational, or comparison.
+   - Skip blocks that would produce generic or off-topic content for this specific keyword.
+   - Prefer blocks that directly address what a user searching for "{cleaned_keyword}" actually wants to know.
+   - Never include a block just to meet a count — quality over quantity.
+
+5. NO PLACEHOLDER TEXT: Never write "Intro text", "Description here", "Header Row", "Column Name",
+   or any filler. Every string must be real, specific, accurate content.
+
 If the document (form or template) has a commonly used or official shorthand name (e.g., "DS-11", "W-9", "RFI"), you may standardize the formatting and use that version consistently throughout the content.
 
 The list of blocks below is unordered and all blocks are equally important initially. Your task is to analyze the document "{cleaned_keyword}" and select at least 15 blocks — you may select more if clearly relevant. Ignore the order — focus only on what provides the most depth, utility, and relevance for this specific template or form.
@@ -367,33 +402,63 @@ def generate_content(prompt: str, keyword: str) -> dict | None:
 def _parse_json(raw: str) -> dict | None:
     """
     Robustly parse JSON from model output.
-    Handles: plain JSON, ```json fenced, leading/trailing whitespace.
+    Uses balanced brace matching to find the FIRST complete JSON object,
+    ignoring any trailing text the model adds after the closing brace.
     """
     text = raw.strip()
 
     # Strip ```json ... ``` fences
     if text.startswith("```"):
         lines = text.split("\n")
-        # Remove first line (```json or ```) and last line (```)
         lines = lines[1:] if lines[0].startswith("```") else lines
         lines = lines[:-1] if lines and lines[-1].strip() == "```" else lines
         text = "\n".join(lines).strip()
 
-    # Find first { and last }
+    # Find start of JSON object
     start = text.find("{")
-    end   = text.rfind("}")
-    if start == -1 or end == -1:
+    if start == -1:
         print("  ❌  No JSON object found in response")
         print(f"       Preview: {text[:300]}")
         return None
 
-    text = text[start : end + 1]
+    # Use balanced brace matching to find the FIRST complete object
+    # This avoids taking trailing text after the closing }
+    depth = 0
+    in_string = False
+    escape_next = False
+    end = -1
+    for i, ch in enumerate(text[start:], start):
+        if escape_next:
+            escape_next = False
+            continue
+        if ch == "\\" and in_string:
+            escape_next = True
+            continue
+        if ch == '"' and not escape_next:
+            in_string = not in_string
+            continue
+        if in_string:
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                end = i
+                break
+
+    if end == -1:
+        print("  ❌  No complete JSON object found (unbalanced braces)")
+        print(f"       Preview: {text[:300]}")
+        return None
+
+    json_str = text[start : end + 1]
 
     try:
-        return json.loads(text)
+        return json.loads(json_str)
     except json.JSONDecodeError as e:
         print(f"  ❌  JSON parse error: {e}")
-        print(f"       Near: ...{text[max(0, e.pos-80):e.pos+80]}...")
+        print(f"       Near: ...{json_str[max(0, e.pos-80):e.pos+80]}...")
         return None
 
 

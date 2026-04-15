@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "outputDirectory": "output",
+  "routes": [
+    { "src": "/sitemap.xml", "dest": "/sitemap.xml", "headers": { "Cache-Control": "public, max-age=86400" } },
+    { "src": "/robots.txt", "dest": "/robots.txt", "headers": { "Cache-Control": "public, max-age=86400" } },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}

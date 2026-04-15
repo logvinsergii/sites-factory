@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="{{ config.site.lang | default('en') }}">
+<head>
+  {{ head_tags | safe }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Dancing+Script:wght@400;600;700&family=Great+Vibes&family=Pinyon+Script&family=Allura&family=Alex+Brush&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #f8f9fc;
+      --surface:  #ffffff;
+      --border:   #e5e7ef;
+      --border-2: #d0d3e0;
+      --text:     #111827;
+      --text-2:   #4b5563;
+      --text-3:   #9ca3af;
+      --blue:     #2563eb;
+      --blue-h:   #1d4ed8;
+      --blue-s:   #eff6ff;
+      --blue-m:   #dbeafe;
+      --green:    #16a34a;
+      --green-s:  #f0fdf4;
+      --red:      #dc2626;
+      --red-s:    #fef2f2;
+      --orange:   #ea580c;
+      --orange-s: #fff7ed;
+      --gold:     #d97706;
+      --gold-s:   #fffbeb;
+      --r:        6px;
+      --rl:       12px;
+      --shadow:   0 1px 3px rgba(0,0,0,.08);
+      --shadow-md:0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:0 8px 32px rgba(0,0,0,.12);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+    /* ── Nav ── */
+    .nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .nav-in{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .nav-brand{font-size:1.1rem;font-weight:600;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
+    .nav-icon{width:30px;height:30px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem}
+    .nav-r{display:flex;align-items:center;gap:12px}
+    .badge{background:var(--green-s);color:var(--green);font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:100px;border:1px solid #bbf7d0}
+    .nav-cta{background:var(--blue);color:#fff;padding:8px 18px;border-radius:var(--r);font-size:.875rem;font-weight:500;text-decoration:none;transition:background .15s}
+    .nav-cta:hover{background:var(--blue-h)}
+
+    /* ── Hero ── */
+    .hero{background:var(--surface);border-bottom:1px solid var(--border);padding:52px 24px 44px;text-align:center}
+    .hero-rating{display:inline-flex;align-items:center;gap:6px;background:var(--blue-s);border:1px solid var(--blue-m);border-radius:100px;padding:5px 14px;font-size:.75rem;font-weight:500;color:var(--blue);margin-bottom:18px}
+    .stars{color:#f59e0b}
+    .hero-title{font-size:clamp(1.75rem,4.5vw,2.75rem);font-weight:700;line-height:1.2;margin-bottom:12px}
+    .hero-title span{color:var(--blue)}
+    .hero-sub{font-size:1rem;color:var(--text-2);max-width:520px;margin:0 auto 28px;line-height:1.65}
+    .chips{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:.8rem;color:var(--text-3)}
+    .chip{display:flex;align-items:center;gap:6px}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+    /* ── Tool ── */
+    .tool-wrap{max-width:840px;margin:0 auto;padding:36px 24px 56px}
+    .tool-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden}
+    .tabs{display:flex;background:var(--bg);border-bottom:1px solid var(--border);padding:6px 6px 0;gap:2px}
+    .tab{flex:1;padding:11px 16px;background:none;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;font-weight:500;color:var(--text-3);border-radius:var(--r) var(--r) 0 0;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+    .tab svg{width:15px;height:15px}
+    .tab.active{background:var(--surface);color:var(--blue);border:1px solid var(--border);border-bottom:1px solid var(--surface);position:relative;bottom:-1px}
+    .tab:hover:not(.active){color:var(--text-2);background:var(--border)}
+    .panel{display:none}.panel.active{display:block}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+    .tg{display:flex;align-items:center;gap:12px}
+    .tlabel{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+    .colors{display:flex;gap:6px}
+    .cbtn{width:24px;height:24px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:transform .12s;outline:none}
+    .cbtn:hover{transform:scale(1.15)}
+    .cbtn.active{border-color:var(--blue);box-shadow:0 0 0 2px #fff,0 0 0 4px var(--blue)}
+    .widths{display:flex;gap:6px}
+    .wbtn{width:34px;height:34px;border-radius:var(--r);border:1.5px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+    .wbtn.active{border-color:var(--blue);background:var(--blue-s)}
+    .wbtn:hover:not(.active){border-color:var(--border-2)}
+    .canvas-area{position:relative;background:#fff;cursor:crosshair}
+    .cph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;pointer-events:none;transition:opacity .2s}
+    .cph-icon{font-size:2rem;opacity:.2}
+    .cph-text{font-size:.9rem;color:var(--text-3)}
+    canvas{display:block;width:100%;touch-action:none}
+    .cbar{display:flex;align-items:center;justify-content:flex-end;padding:10px 20px;border-top:1px solid var(--border);background:var(--bg)}
+    .btn-ghost{background:none;border:1px solid var(--border);padding:7px 16px;border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:500;color:var(--text-2);cursor:pointer;transition:all .12s}
+    .btn-ghost:hover{border-color:var(--border-2);color:var(--text)}
+    .type-panel{padding:20px}
+    .type-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s;margin-bottom:16px}
+    .type-input:focus{border-color:var(--blue)}
+    .type-input::placeholder{color:var(--text-3)}
+    .font-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:16px}
+    .fc{border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all .12s;background:var(--surface)}
+    .fc:hover{border-color:var(--border-2)}
+    .fc.active{border-color:var(--blue);background:var(--blue-s)}
+    .fp{font-size:1.6rem;line-height:1.2;color:var(--text);margin-bottom:4px}
+    .fn{font-size:.7rem;font-weight:600;color:var(--text-3);letter-spacing:.04em;text-transform:uppercase}
+    .tprev{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);min-height:110px;display:flex;align-items:center;justify-content:center;padding:16px}
+    .tprev-text{font-size:2.8rem;color:#111827;text-align:center;word-break:break-word;line-height:1.2;transition:font-family .15s}
+    .tprev-ph{font-size:.875rem;color:var(--text-3)}
+    .dl-bar{padding:16px 20px;border-top:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .dl-meta{font-size:.8rem;color:var(--text-3)}
+    .dl-meta span{color:var(--text-2);font-weight:500}
+    .btn-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:11px 24px;border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;font-weight:600;border:none;cursor:pointer;transition:background .15s}
+    .btn-dl:hover{background:var(--blue-h)}
+    .btn-dl svg{width:16px;height:16px}
+
+    /* ── Content sections from Dynamic Prompt ── */
+    .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+    .section{padding:64px 0}
+    .section--alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+    .sec-lbl{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+    h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.2}
+    .sec-sub{font-size:.95rem;color:var(--text-2);max-width:580px;margin-bottom:36px;line-height:1.7}
+
+    /* intro_what_is */
+    .block-intro p{font-size:1.05rem;color:var(--text-2);max-width:780px;line-height:1.8}
+
+    /* why_should_you_box */
+    .block-why{background:var(--blue-s);border-left:4px solid var(--blue);border-radius:var(--r);padding:22px 26px}
+    .block-why p{font-size:.975rem;color:var(--text-2);line-height:1.7}
+
+    /* who_uses_checkmarks_blue */
+    .who-intro,.who-outro{color:var(--text-2);font-size:.95rem;max-width:640px;margin-bottom:18px}
+    .who-outro{margin-top:18px;margin-bottom:0}
+    .checklist{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:.95rem;color:var(--text-2)}
+    .checklist li::before{content:'✓';min-width:22px;height:22px;border-radius:4px;background:var(--green-s);color:var(--green);border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin-top:2px;flex-shrink:0}
+
+    /* key_features cards */
+    .card-grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+    .card-grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .feat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:24px;box-shadow:var(--shadow);transition:box-shadow .15s}
+    .feat-card:hover{box-shadow:var(--shadow-md)}
+    .feat-card-label{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:8px}
+    .feat-card-text{font-size:.875rem;color:var(--text-2);line-height:1.65}
+
+    /* user_profiles_green */
+    .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+    .profile-card{background:var(--green-s);border-radius:var(--rl);padding:22px;border:1px solid #bbf7d0}
+    .profile-label{font-weight:600;color:var(--green);margin-bottom:8px;font-size:.875rem}
+    .profile-text{font-size:.875rem;color:var(--text-2);line-height:1.65}
+
+    /* security_data_green */
+    .data-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+    .data-item{display:flex;gap:12px;align-items:flex-start;background:var(--green-s);border-radius:var(--r);padding:14px 16px;border:1px solid #bbf7d0}
+    .data-label{font-weight:600;font-size:.8rem;color:var(--green);min-width:120px;flex-shrink:0;padding-top:2px}
+    .data-text{font-size:.85rem;color:var(--text-2)}
+
+    /* penalties_risks_red */
+    .risk-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+    .risk-item{display:flex;gap:12px;align-items:flex-start;background:var(--red-s);border-radius:var(--r);padding:14px 16px;border-left:3px solid var(--red)}
+    .risk-label{font-weight:600;font-size:.8rem;color:var(--red);min-width:120px;flex-shrink:0}
+    .risk-text{font-size:.85rem;color:var(--text-2)}
+
+    /* challenges_orange_bullets */
+    .challenge-list{display:flex;flex-direction:column;gap:10px}
+    .challenge-item{display:flex;gap:12px;align-items:flex-start;background:var(--orange-s);border-radius:var(--r);padding:14px 18px;border-left:3px solid var(--orange)}
+    .challenge-item::before{content:'!';min-width:20px;height:20px;background:var(--orange);color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0;margin-top:1px}
+    .challenge-text{font-size:.9rem;color:var(--text-2);line-height:1.6}
+
+    /* step_guide_vertical */
+    .steps-v{display:flex;flex-direction:column}
+    .step-v{display:flex;gap:18px;align-items:flex-start;position:relative}
+    .step-v:not(:last-child)::after{content:'';position:absolute;left:15px;top:34px;width:1px;height:calc(100% - 4px);background:linear-gradient(to bottom,var(--blue-m),transparent)}
+    .step-v-num{min-width:32px;height:32px;border-radius:8px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;position:relative;z-index:1}
+    .step-v-body{padding:4px 0 28px}
+    .step-v-label{font-weight:600;color:var(--text);margin-bottom:4px;font-size:.9rem}
+    .step-v-text{font-size:.875rem;color:var(--text-2)}
+
+    /* step_guide_grid */
+    .steps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .step-grid-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:22px;box-shadow:var(--shadow)}
+    .step-grid-num{width:32px;height:32px;border-radius:8px;background:var(--blue-s);color:var(--blue);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .step-grid-label{font-weight:600;color:var(--text);margin-bottom:6px;font-size:.9rem}
+    .step-grid-text{font-size:.85rem;color:var(--text-2)}
+
+    /* how_it_works_arrows */
+    .arrows-flow{display:flex;align-items:flex-start;flex-wrap:wrap}
+    .arrow-step{flex:1;min-width:180px;text-align:center;padding:24px 16px;position:relative}
+    .arrow-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--blue)}
+    .arrow-num{width:38px;height:38px;border-radius:10px;background:var(--blue-s);border:1.5px solid var(--blue-m);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.875rem;margin:0 auto 12px}
+    .arrow-label{font-weight:600;color:var(--text);font-size:.875rem;margin-bottom:5px}
+    .arrow-text{font-size:.825rem;color:var(--text-2)}
+
+    /* platform_requirements_box */
+    .platform-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--rl);padding:28px}
+    .platform-intro,.platform-outro{color:var(--text-2);font-size:.95rem;max-width:680px}
+    .platform-outro{margin-top:20px}
+    .platform-list{list-style:none;display:flex;flex-direction:column;gap:0;margin:18px 0}
+    .platform-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
+    .platform-item:last-child{border-bottom:none}
+    .platform-label{font-weight:600;font-size:.85rem;color:var(--text);min-width:140px;flex-shrink:0}
+    .platform-text{font-size:.85rem;color:var(--text-2)}
+
+    /* tables */
+    .tbl-wrap{overflow-x:auto}
+    .tbl{width:100%;border-collapse:collapse;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+    .tbl th{background:var(--text);color:#fff;padding:12px 16px;font-size:.8rem;text-align:left;font-weight:500}
+    .tbl td{padding:12px 16px;font-size:.875rem;color:var(--text-2);border-bottom:1px solid var(--border)}
+    .tbl tr:last-child td{border-bottom:none}
+    .tbl tr:nth-child(even) td{background:var(--bg)}
+    .tbl-label{font-weight:600;color:var(--text)!important}
+    .tbl-yes{color:var(--green)!important;font-weight:500}
+    .tbl-no{color:var(--red)!important}
+
+    /* pricing table */
+    .pricing-tbl th:nth-child(2){background:var(--blue)}
+    .pricing-tbl td:nth-child(2){color:var(--blue)!important;font-weight:500;background:var(--blue-s)}
+    .pricing-tbl tr:nth-child(even) td:nth-child(2){background:var(--blue-s)}
+
+    /* deadlines */
+    .deadlines-list{display:flex;flex-direction:column;gap:12px}
+    .deadline-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;border-left:3px solid var(--blue)}
+    .deadline-label{font-weight:600;font-size:.85rem;color:var(--blue);min-width:150px;flex-shrink:0}
+    .deadline-text{font-size:.875rem;color:var(--text-2)}
+
+    /* milestones */
+    .milestone-list{display:flex;flex-direction:column}
+    .milestone-item{display:flex;gap:18px;position:relative}
+    .milestone-item:not(:last-child)::after{content:'';position:absolute;left:15px;top:34px;width:1px;height:calc(100% - 4px);background:repeating-linear-gradient(to bottom,var(--border) 0,var(--border) 5px,transparent 5px,transparent 10px)}
+    .milestone-num{min-width:32px;height:32px;border-radius:8px;background:var(--surface);border:1.5px solid var(--blue);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;position:relative;z-index:1}
+    .milestone-body{padding:4px 0 32px}
+    .milestone-label{font-weight:600;color:var(--text);margin-bottom:4px;font-size:.9rem}
+    .milestone-text{font-size:.875rem;color:var(--text-2)}
+
+    /* hsteps */
+    .hsteps{display:flex;flex-wrap:wrap;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+    .hstep{flex:1;min-width:150px;padding:20px 16px;background:var(--surface);border-right:1px solid var(--border);text-align:center;transition:background .15s}
+    .hstep:last-child{border-right:none}
+    .hstep:hover{background:var(--bg)}
+    .hstep-num{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+    .hstep-label{font-size:.875rem;font-weight:600;color:var(--text);margin-bottom:4px}
+    .hstep-text{font-size:.8rem;color:var(--text-3)}
+
+    /* best_practices */
+    .practices-list{display:flex;flex-direction:column;gap:14px}
+    .practice-item{display:flex;gap:14px;align-items:flex-start;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);transition:border-color .15s}
+    .practice-item:hover{border-color:var(--blue)}
+    .practice-icon{min-width:32px;height:32px;border-radius:8px;background:var(--blue-s);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.875rem;flex-shrink:0;border:1px solid var(--blue-m)}
+    .practice-label{font-weight:600;color:var(--text);margin-bottom:4px;font-size:.9rem}
+    .practice-text{font-size:.875rem;color:var(--text-2);line-height:1.65}
+
+    /* examples */
+    .case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+    .case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:24px;box-shadow:var(--shadow);transition:border-color .15s}
+    .case-card:hover{border-color:var(--blue)}
+    .case-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+    .case-intro{font-size:.875rem;color:var(--text-2);margin-bottom:10px;line-height:1.65}
+    .case-point{font-weight:600;color:var(--text);font-size:.9rem;padding:8px 12px;background:var(--blue-s);border-radius:6px;margin-bottom:10px;border-left:2px solid var(--blue)}
+    .case-outro{font-size:.85rem;color:var(--text-2);line-height:1.65}
+
+    /* FAQ */
+    .faq{display:flex;flex-direction:column}
+    .fqi{border-bottom:1px solid var(--border)}
+    .fqb{width:100%;text-align:left;padding:18px 0;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--text)}
+    .fqi-icon{width:22px;height:22px;border-radius:50%;background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--text-3);flex-shrink:0;transition:all .15s}
+    .fqb.open .fqi-icon{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg)}
+    .fqbody{max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .fqbody.open{max-height:300px}
+    .fqbody p{padding:0 0 18px;font-size:.875rem;color:var(--text-2);line-height:1.75}
+
+    /* new v2.0 blocks */
+    .fields-list{display:flex;flex-direction:column;gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+    .field-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);padding:14px 18px;border-bottom:1px solid var(--border);transition:background .12s}
+    .field-item:last-child{border-bottom:none}
+    .field-item:hover{background:var(--bg)}
+    .field-label{font-size:.75rem;font-weight:600;color:var(--blue);min-width:150px;flex-shrink:0;padding-top:2px;font-family:monospace;letter-spacing:.02em}
+    .field-text{font-size:.875rem;color:var(--text-2);line-height:1.65}
+
+    .cost-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:28px}
+    .cost-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:20px 0}
+    .cost-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center}
+    .cost-item-label{font-size:.7rem;font-weight:600;color:var(--text-3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+    .cost-item-value{font-size:1.3rem;font-weight:700;color:var(--blue)}
+
+    .roi-banner{background:var(--text);border-radius:var(--rl);padding:40px;position:relative;overflow:hidden}
+    .roi-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:28px;margin-top:28px}
+    .roi-stat-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
+    .roi-stat-text{font-size:.875rem;color:rgba(255,255,255,.7);line-height:1.6}
+    .roi-banner h2{color:#fff}.roi-banner .sec-sub{color:rgba(255,255,255,.65)}
+
+    .retention-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+    .retention-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);padding:14px 18px;border-bottom:1px solid var(--border);transition:background .12s}
+    .retention-item:last-child{border-bottom:none}
+    .retention-item:hover{background:var(--bg)}
+    .retention-dot{min-width:8px;height:8px;border-radius:50%;background:var(--blue);margin-top:6px;flex-shrink:0}
+    .retention-label{font-weight:600;color:var(--text);font-size:.875rem;margin-bottom:2px}
+    .retention-text{font-size:.85rem;color:var(--text-2)}
+
+    .industry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .industry-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:22px;transition:border-color .15s}
+    .industry-card:hover{border-color:var(--blue)}
+    .industry-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+    .industry-text{font-size:.875rem;color:var(--text-2);line-height:1.65}
+
+    /* last-updated */
+    .last-updated{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text-3);margin-bottom:20px}
+    .last-updated::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+    /* Footer */
+    .footer{border-top:1px solid var(--border);background:var(--surface);padding:32px 24px}
+    .footer-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .footer-brand{font-size:.95rem;font-weight:600;color:var(--text)}
+    .footer-note{font-size:.8rem;color:var(--text-3)}
+
+    /* responsive */
+    @media(max-width:640px){
+      .hero{padding:36px 20px 28px}
+      .arrows-flow{flex-direction:column}
+      .arrow-step:not(:last-child)::after{display:none}
+      .hsteps{flex-direction:column}
+      .hstep{border-right:none;border-bottom:1px solid var(--border)}
+      .dl-bar{flex-direction:column;align-items:stretch}
+      .btn-dl{justify-content:center}
+      .roi-banner{padding:28px 20px}
+      .wrap{padding:0 16px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="/" class="nav-brand">
+      <div class="nav-icon">✦</div>
+      {{ config.site.name }}
+    </a>
+    <div class="nav-r">
+      <span class="badge">✓ Free · No signup</span>
+      <a href="#tool" class="nav-cta">Create Signature</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <p class="last-updated">Last updated: {{ last_updated }}</p>
+  <div class="hero-rating"><span class="stars">★★★★★</span> Rated 4.8 by 2,341 users</div>
+  <h1 class="hero-title">{{ content.title }}</h1>
+  {% if hero and hero.subheadline %}
+  <p class="hero-sub">{{ hero.subheadline }}</p>
+  {% endif %}
+  <div class="chips">
+    <div class="chip"><div class="dot"></div>No watermark</div>
+    <div class="chip"><div class="dot"></div>Transparent PNG</div>
+    <div class="chip"><div class="dot"></div>Works on any device</div>
+    <div class="chip"><div class="dot"></div>Private — nothing sent to servers</div>
+  </div>
+</section>
+
+<!-- ── Signature Tool (always static) ── -->
+<div class="tool-wrap" id="tool">
+  <div class="tool-box">
+    <div class="tabs">
+      <button class="tab active" data-tab="draw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Draw Signature
+      </button>
+      <button class="tab" data-tab="type">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        Type Signature
+      </button>
+    </div>
+
+    <!-- Draw -->
+    <div class="panel active" id="panel-draw">
+      <div class="toolbar">
+        <div class="tg">
+          <span class="tlabel">Color</span>
+          <div class="colors">
+            <button class="cbtn active" style="background:#111827" data-color="#111827" title="Black"></button>
+            <button class="cbtn" style="background:#1e40af" data-color="#1e40af" title="Navy"></button>
+            <button class="cbtn" style="background:#7c3aed" data-color="#7c3aed" title="Violet"></button>
+            <button class="cbtn" style="background:#b91c1c" data-color="#b91c1c" title="Red"></button>
+          </div>
+        </div>
+        <div class="tg">
+          <span class="tlabel">Thickness</span>
+          <div class="widths">
+            <button class="wbtn" data-w="1.5"><svg viewBox="0 0 28 28" width="28" height="28"><line x1="4" y1="14" x2="24" y2="14" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+            <button class="wbtn active" data-w="2.8"><svg viewBox="0 0 28 28" width="28" height="28"><line x1="4" y1="14" x2="24" y2="14" stroke="#111" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <button class="wbtn" data-w="4.5"><svg viewBox="0 0 28 28" width="28" height="28"><line x1="4" y1="14" x2="24" y2="14" stroke="#111" stroke-width="3.8" stroke-linecap="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="canvas-area" id="ca">
+        <div class="cph" id="cph"><div class="cph-icon">✍️</div><div class="cph-text">Draw your signature here using your mouse or trackpad</div></div>
+        <canvas id="sig-canvas" height="220"></canvas>
+      </div>
+      <div class="cbar"><button class="btn-ghost" id="btn-clear">Clear canvas</button></div>
+    </div>
+
+    <!-- Type -->
+    <div class="panel type-panel" id="panel-type">
+      <input type="text" class="type-input" id="type-input" placeholder="Type your full name or initials…" maxlength="40">
+      <div class="font-grid">
+        <div class="fc active" data-font="'Dancing Script',cursive"><div class="fp" style="font-family:'Dancing Script',cursive">Signature</div><div class="fn">Dancing Script</div></div>
+        <div class="fc" data-font="'Great Vibes',cursive"><div class="fp" style="font-family:'Great Vibes',cursive">Signature</div><div class="fn">Great Vibes</div></div>
+        <div class="fc" data-font="'Pinyon Script',cursive"><div class="fp" style="font-family:'Pinyon Script',cursive">Signature</div><div class="fn">Pinyon Script</div></div>
+        <div class="fc" data-font="'Allura',cursive"><div class="fp" style="font-family:'Allura',cursive">Signature</div><div class="fn">Allura</div></div>
+        <div class="fc" data-font="'Alex Brush',cursive"><div class="fp" style="font-family:'Alex Brush',cursive">Signature</div><div class="fn">Alex Brush</div></div>
+      </div>
+      <div class="tprev"><span class="tprev-ph" id="tph">Your signature preview will appear here</span><div class="tprev-text" id="tdisplay" style="display:none;font-family:'Dancing Script',cursive"></div></div>
+    </div>
+
+    <div class="dl-bar">
+      <div class="dl-meta">Format: <span>PNG · Transparent background</span> · High resolution · No watermark</div>
+      <button class="btn-dl" id="btn-dl">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download PNG
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Dynamic Content Sections ── -->
+<main>
+{% for section in content.sections %}
+
+  {% if section.id == 'intro_what_is' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="block-intro">{% for p in section.paragraphs %}<p>{{ p }}</p>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'why_should_you_box' %}
+  <section class="section" style="padding:32px 0">
+    <div class="wrap"><div class="block-why">{% for p in section.paragraphs %}<p>{{ p }}</p>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'who_uses_checkmarks_blue' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs[0] is defined %}<p class="who-intro">{{ section.paragraphs[0]|replace('[INTRO]','')|trim }}</p>{% endif %}
+    <ul class="checklist">{% for b in section.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
+    {% if section.paragraphs[1] is defined %}<p class="who-outro">{{ section.paragraphs[1]|replace('[OUTRO]','')|trim }}</p>{% endif %}</div>
+  </section>
+
+  {% elif section.id == 'key_features_6_cards' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="card-grid-3">{% for b in section.bullets %}<div class="feat-card"><div class="feat-card-label">{{ b.label }}</div><div class="feat-card-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'key_features_4_cards' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="card-grid-2">{% for b in section.bullets %}<div class="feat-card"><div class="feat-card-label">{{ b.label }}</div><div class="feat-card-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'user_profiles_green' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="profile-grid">{% for b in section.bullets %}<div class="profile-card"><div class="profile-label">{{ b.label }}</div><div class="profile-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'security_data_green' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="data-list">{% for b in section.bullets %}<div class="data-item"><div class="data-label">{{ b.label }}</div><div class="data-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'penalties_risks_red' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="risk-list">{% for b in section.bullets %}<div class="risk-item"><div class="risk-label">{{ b.label }}</div><div class="risk-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'challenges_orange_bullets' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="challenge-list">{% for b in section.bullets %}<div class="challenge-item"><div class="challenge-text">{{ b }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'step_guide_vertical' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="steps-v">{% for b in section.bullets %}<div class="step-v"><div class="step-v-num">{{ loop.index }}</div><div class="step-v-body"><div class="step-v-label">{{ b.label }}</div><div class="step-v-text">{{ b.text }}</div></div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'step_guide_grid' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="steps-grid">{% for b in section.bullets %}<div class="step-grid-card"><div class="step-grid-num">{{ loop.index }}</div><div class="step-grid-label">{{ b.label }}</div><div class="step-grid-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'how_it_works_arrows' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="arrows-flow">{% for b in section.bullets %}<div class="arrow-step"><div class="arrow-num">{{ loop.index }}</div><div class="arrow-label">{{ b.label }}</div><div class="arrow-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'platform_requirements_box' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="platform-box">
+      {% if section.paragraphs[0] is defined %}<p class="platform-intro">{{ section.paragraphs[0]|replace('[INTRO]','')|trim }}</p>{% endif %}
+      <ul class="platform-list">{% for b in section.bullets %}<li class="platform-item"><span class="platform-label">{{ b.label }}</span><span class="platform-text">{{ b.text }}</span></li>{% endfor %}</ul>
+      {% if section.paragraphs[1] is defined %}<p class="platform-outro">{{ section.paragraphs[1]|replace('[OUTRO]','')|trim }}</p>{% endif %}
+    </div></div>
+  </section>
+
+  {% elif section.id == 'workflow_setup_table' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="tbl-wrap"><table class="tbl">
+      {% for b in section.bullets %}{% if loop.first %}<thead><tr><th>{{ b.label }}</th><th>{{ b.text }}</th></tr></thead><tbody>{% else %}<tr><td class="tbl-label">{{ b.label }}</td><td>{{ b.text }}</td></tr>{% endif %}{% endfor %}</tbody>
+    </table></div></div>
+  </section>
+
+  {% elif section.id == 'comparison_check_table' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="tbl-wrap"><table class="tbl">
+      {% for b in section.bullets %}{% set cols = b.text.split(' | ') %}{% if loop.first %}<thead><tr><th>{{ b.label }}</th>{% for c in cols %}<th>{{ c }}</th>{% endfor %}</tr></thead><tbody>{% else %}<tr><td class="tbl-label">{{ b.label }}</td>{% for c in cols %}<td class="{{ 'tbl-yes' if c.lower()=='yes' else ('tbl-no' if c.lower()=='no' else '') }}">{{ c }}</td>{% endfor %}</tr>{% endif %}{% endfor %}</tbody>
+    </table></div></div>
+  </section>
+
+  {% elif section.id == 'pricing_comparison_table' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="tbl-wrap"><table class="tbl pricing-tbl">
+      {% for b in section.bullets %}{% set cols = b.text.split(' | ') %}{% if loop.first %}<thead><tr><th>{{ b.label }}</th>{% for c in cols %}<th>{{ c }}</th>{% endfor %}</tr></thead><tbody>{% else %}<tr><td class="tbl-label">{{ b.label }}</td>{% for c in cols %}<td>{{ c }}</td>{% endfor %}</tr>{% endif %}{% endfor %}</tbody>
+    </table></div></div>
+  </section>
+
+  {% elif section.id == 'deadlines_dated_list' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="deadlines-list">{% for b in section.bullets %}<div class="deadline-item"><div class="deadline-label">{{ b.label }}</div><div class="deadline-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'deadlines_vertical_dashed' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="milestone-list">{% for b in section.bullets %}<div class="milestone-item"><div class="milestone-num">{{ loop.index }}</div><div class="milestone-body"><div class="milestone-label">{{ b.label }}</div><div class="milestone-text">{{ b.text }}</div></div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'deadlines_horizontal_steps' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="hsteps">{% for b in section.bullets %}<div class="hstep"><div class="hstep-num">{{ '%02d' % loop.index }}</div><div class="hstep-label">{{ b.label }}</div><div class="hstep-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'best_practices_list' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="practices-list">{% for b in section.bullets %}<div class="practice-item"><div class="practice-icon">◆</div><div><div class="practice-label">{{ b.label }}</div><div class="practice-text">{{ b.text }}</div></div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'examples_case_cards' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="case-grid">{% for b in section.bullets %}{% set parts = b.text.split(' :: ') %}<div class="case-card"><div class="case-label">{{ b.label }}</div>{% if parts|length >= 1 %}<p class="case-intro">{{ parts[0] }}</p>{% endif %}{% if parts|length >= 2 %}<p class="case-point">{{ parts[1] }}</p>{% endif %}{% if parts|length >= 3 %}<p class="case-outro">{{ parts[2] }}</p>{% endif %}</div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'fillable_fields_guide' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="fields-list">{% for b in section.bullets %}<div class="field-item"><div class="field-label">{{ b.label }}</div><div class="field-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'cost_calculator_box' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    <div class="cost-box">
+      {% if section.paragraphs[0] is defined %}<p class="sec-sub">{{ section.paragraphs[0]|replace('[INTRO]','')|trim }}</p>{% endif %}
+      <div class="cost-grid">{% for b in section.bullets %}<div class="cost-item"><div class="cost-item-label">{{ b.label }}</div><div class="cost-item-value">{{ b.text }}</div></div>{% endfor %}</div>
+      {% if section.paragraphs[1] is defined %}<p style="font-size:.875rem;color:var(--text-2);margin-top:8px">{{ section.paragraphs[1]|replace('[OUTRO]','')|trim }}</p>{% endif %}
+    </div></div>
+  </section>
+
+  {% elif section.id == 'roi_stats_banner' %}
+  <section class="section">
+    <div class="wrap"><div class="roi-banner">
+      <h2>{{ section.heading }}</h2>
+      {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+      <div class="roi-stats">{% for b in section.bullets %}<div><div class="roi-stat-label">{{ b.label }}</div><div class="roi-stat-text">{{ b.text }}</div></div>{% endfor %}</div>
+    </div></div>
+  </section>
+
+  {% elif section.id == 'state_requirements_table' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="tbl-wrap"><table class="tbl">
+      {% for b in section.bullets %}{% set cols = b.text.split(' | ') %}{% if loop.first %}<thead><tr><th>{{ b.label }}</th>{% for c in cols %}<th>{{ c }}</th>{% endfor %}</tr></thead><tbody>{% else %}<tr><td class="tbl-label">{{ b.label }}</td>{% for c in cols %}<td>{{ c }}</td>{% endfor %}</tr>{% endif %}{% endfor %}</tbody>
+    </table></div></div>
+  </section>
+
+  {% elif section.id == 'industry_notes_cards' %}
+  <section class="section">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="industry-grid">{% for b in section.bullets %}<div class="industry-card"><div class="industry-label">{{ b.label }}</div><div class="industry-text">{{ b.text }}</div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'retention_timeline' %}
+  <section class="section section--alt">
+    <div class="wrap"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="retention-list">{% for b in section.bullets %}<div class="retention-item"><div class="retention-dot"></div><div><div class="retention-label">{{ b.label }}</div><div class="retention-text">{{ b.text }}</div></div></div>{% endfor %}</div></div>
+  </section>
+
+  {% elif section.id == 'troubleshooting_accordion' %}
+  <section class="section">
+    <div class="wrap" style="max-width:720px"><h2>{{ section.heading }}</h2>
+    {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
+    <div class="faq">{% for b in section.bullets %}<div class="fqi"><button class="fqb" data-i="{{ loop.index0 }}">{{ b.label }}<div class="fqi-icon">+</div></button><div class="fqbody" id="fq{{ loop.index0 }}"><p>{{ b.text }}</p></div></div>{% endfor %}</div></div>
+  </section>
+  {% endif %}
+
+{% endfor %}
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-in">
+    <div class="footer-brand">✦ {{ config.site.name }}</div>
+    <div class="footer-note">
+      {% if content.footer is defined %}{{ content.footer.tagline | default('') }} · {% endif %}
+      © {{ now_year }} {{ config.site.name }}
+    </div>
+  </div>
+</footer>
+
+{{ schema_ld | safe }}
+
+<script>
+// ── Canvas ────────────────────────────────────────────────────────────────
+const canvas=document.getElementById('sig-canvas'),ctx=canvas.getContext('2d'),ca=document.getElementById('ca'),cph=document.getElementById('cph');
+let drawing=false,hasDrawn=false,inkColor='#111827',inkWidth=2.8;
+function initC(){const dpr=window.devicePixelRatio||1,w=ca.clientWidth,h=220;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.height=h+'px';ctx.scale(dpr,dpr);ctx.lineCap='round';ctx.lineJoin='round';}
+initC();
+function gxy(e){const r=canvas.getBoundingClientRect();if(e.touches)return{x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};return{x:e.clientX-r.left,y:e.clientY-r.top};}
+canvas.addEventListener('mousedown',e=>{drawing=true;const p=gxy(e);ctx.beginPath();ctx.moveTo(p.x,p.y);if(!hasDrawn){cph.style.opacity='0';hasDrawn=true;}});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=gxy(e);ctx.strokeStyle=inkColor;ctx.lineWidth=inkWidth;ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('mouseup',()=>drawing=false);canvas.addEventListener('mouseleave',()=>drawing=false);
+canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=gxy(e);ctx.beginPath();ctx.moveTo(p.x,p.y);if(!hasDrawn){cph.style.opacity='0';hasDrawn=true;}},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=gxy(e);ctx.strokeStyle=inkColor;ctx.lineWidth=inkWidth;ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);},{passive:false});
+canvas.addEventListener('touchend',()=>drawing=false);
+document.getElementById('btn-clear').addEventListener('click',()=>{ctx.clearRect(0,0,canvas.width,canvas.height);hasDrawn=false;cph.style.opacity='1';});
+document.querySelectorAll('.cbtn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.cbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');inkColor=b.dataset.color;}));
+document.querySelectorAll('.wbtn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.wbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');inkWidth=parseFloat(b.dataset.w);}));
+// ── Tabs ─────────────────────────────────────────────────────────────────
+let activeTab='draw';
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{activeTab=t.dataset.tab;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('panel-'+activeTab).classList.add('active');}));
+// ── Type mode ─────────────────────────────────────────────────────────────
+let activeFont="'Dancing Script',cursive";
+const tdisplay=document.getElementById('tdisplay'),tph=document.getElementById('tph'),tinput=document.getElementById('type-input');
+tinput.addEventListener('input',()=>{const v=tinput.value.trim();if(v){tph.style.display='none';tdisplay.style.display='block';tdisplay.textContent=v;}else{tph.style.display='block';tdisplay.style.display='none';}});
+document.querySelectorAll('.fc').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.fc').forEach(x=>x.classList.remove('active'));c.classList.add('active');activeFont=c.dataset.font;tdisplay.style.fontFamily=activeFont;}));
+// ── Download ──────────────────────────────────────────────────────────────
+document.getElementById('btn-dl').addEventListener('click',()=>{
+  if(activeTab==='draw'){const l=document.createElement('a');l.download='my-signature.png';l.href=canvas.toDataURL('image/png');l.click();}
+  else{const text=tinput.value.trim();if(!text){alert('Please type your name first.');return;}const dpr=window.devicePixelRatio||1,W=700,H=220,off=document.createElement('canvas');off.width=W*dpr;off.height=H*dpr;const oc=off.getContext('2d');oc.scale(dpr,dpr);const fs=Math.min(120,Math.floor(W*0.85/Math.max(text.length,2)));oc.font=fs+'px '+activeFont;oc.fillStyle=inkColor;oc.textAlign='center';oc.textBaseline='middle';oc.fillText(text,W/2,H/2);const l=document.createElement('a');l.download='my-signature.png';l.href=off.toDataURL('image/png');l.click();}
+});
+// ── FAQ ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('.fqb').forEach(b=>b.addEventListener('click',()=>{const i=b.dataset.i,body=document.getElementById('fq'+i),open=b.classList.contains('open');document.querySelectorAll('.fqb').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.fqbody').forEach(x=>x.classList.remove('open'));if(!open){b.classList.add('open');body.classList.add('open');}}));
+</script>
+</body>
+</html>
