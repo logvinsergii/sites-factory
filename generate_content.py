@@ -43,6 +43,12 @@ LITELLM_MODEL = "gemini/gemini-2.5-flash"
 MAX_TOKENS    = 16000        # enough for 15–20 blocks of JSON
 TEMPERATURE   = 1.0          # higher = more variety between runs
 
+# ── API key — loaded from key.txt (never committed to git) ───────────────────
+# Create key.txt in the project root with your LiteLLM API key on one line.
+# If key.txt is absent, requests are sent without Authorization header.
+_key_path = ROOT / "key.txt"
+LITELLM_API_KEY = _key_path.read_text(encoding="utf-8").strip() if _key_path.exists() else ""
+
 
 # ── Dynamic Prompt template ───────────────────────────────────────────────────
 # This is your prompt with {cleaned_keyword} as the only variable.
@@ -314,10 +320,15 @@ def generate_content(prompt: str, keyword: str) -> dict | None:
         ],
     }
 
+    headers = {"Content-Type": "application/json"}
+    if LITELLM_API_KEY:
+        headers["Authorization"] = f"Bearer {LITELLM_API_KEY}"
+
     try:
         resp = requests.post(
             LITELLM_URL,
             json=payload,
+            headers=headers,
             timeout=180,
         )
         resp.raise_for_status()
