@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "pip install -r requirements.txt --break-system-packages && python build.py --site sites/esign_001",
+  "buildCommand": "uv pip install -r requirements.txt --system && python build.py --site sites/esign_001",
   "outputDirectory": "sites/esign_001/output",
-  "installCommand": "pip install -r requirements.txt --break-system-packages",
+  "installCommand": "uv pip install -r requirements.txt --system",
   "framework": null,
   "routes": [
     {
