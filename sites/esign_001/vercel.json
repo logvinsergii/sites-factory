@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "python -m venv /tmp/venv && /tmp/venv/bin/pip install -r requirements.txt && /tmp/venv/bin/python build.py --site sites/esign_002",
-  "outputDirectory": "sites/esign_002/output",
+  "buildCommand": "python -m venv /tmp/venv && /tmp/venv/bin/pip install -r requirements.txt && /tmp/venv/bin/python build.py --site sites/esign_001",
+  "outputDirectory": "sites/esign_001/output",
   "installCommand": "python -m venv /tmp/venv && /tmp/venv/bin/pip install -r requirements.txt",
   "framework": null,
   "routes": [
