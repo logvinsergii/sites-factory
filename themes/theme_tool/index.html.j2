@@ -559,7 +559,7 @@
   <section class="section">
     <div class="wrap"><h2>{{ section.heading }}</h2>
     {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
-    <div class="practices-list">{% for b in section.bullets %}<div class="practice-item"><div class="practice-icon">◆</div><div><div class="practice-label">{{ b.label }}</div><div class="practice-text">{{ b.text }}</div></div></div>{% endfor %}</div></div>
+    <div class="practices-list">{% for b in section.bullets %}<div class="practice-item"><div class="practice-icon">◆</div><div>{% if b is mapping %}<div class="practice-label">{{ b.label }}</div><div class="practice-text">{{ b.text }}</div>{% else %}<div class="practice-text">{{ b }}</div>{% endif %}</div></div>{% endfor %}</div></div>
   </section>
 
   {% elif section.id == 'examples_case_cards' %}
