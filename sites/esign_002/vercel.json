@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "buildCommand": "python -m pip install -r requirements.txt --break-system-packages && python build.py --site sites/esign_002",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "sites/esign_002/output",
-  "installCommand": "python -m pip install -r requirements.txt --break-system-packages",
+  "installCommand": "echo skip",
   "framework": null,
   "routes": [
     { "src": "/sitemap.xml", "dest": "/sitemap.xml", "headers": { "Cache-Control": "public, max-age=86400" } },
-    { "src": "/robots.txt",  "dest": "/robots.txt",  "headers": { "Cache-Control": "public, max-age=86400" } },
+    { "src": "/robots.txt", "dest": "/robots.txt", "headers": { "Cache-Control": "public, max-age=86400" } },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }
