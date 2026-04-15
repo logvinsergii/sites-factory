@@ -121,7 +121,7 @@
     .block-why p{font-size:.975rem;color:var(--text-2);line-height:1.7}
 
     /* who_uses_checkmarks_blue */
-    .who-intro,.who-outro{color:var(--text-2);font-size:.95rem;max-width:640px;margin-bottom:18px}
+    .who-intro,.who-outro{color:var(--text-2);font-size:.95rem;max-width:100%;margin-bottom:18px}
     .who-outro{margin-top:18px;margin-bottom:0}
     .checklist{list-style:none;display:flex;flex-direction:column;gap:10px}
     .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:.95rem;color:var(--text-2)}
@@ -185,7 +185,7 @@
 
     /* platform_requirements_box */
     .platform-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--rl);padding:28px}
-    .platform-intro,.platform-outro{color:var(--text-2);font-size:.95rem;max-width:680px}
+    .platform-intro,.platform-outro{color:var(--text-2);font-size:.95rem;max-width:100%}
     .platform-outro{margin-top:20px}
     .platform-list{list-style:none;display:flex;flex-direction:column;gap:0;margin:18px 0}
     .platform-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
@@ -620,7 +620,7 @@
 
   {% elif section.id == 'troubleshooting_accordion' %}
   <section class="section">
-    <div class="wrap" style="max-width:720px"><h2>{{ section.heading }}</h2>
+    <div class="wrap" style="max-width:720px;margin:0 auto"><h2>{{ section.heading }}</h2>
     {% if section.paragraphs %}<p class="sec-sub">{{ section.paragraphs[0] }}</p>{% endif %}
     <div class="faq">{% for b in section.bullets %}<div class="fqi"><button class="fqb" data-i="{{ loop.index0 }}">{{ b.label }}<div class="fqi-icon">+</div></button><div class="fqbody" id="fq{{ loop.index0 }}"><p>{{ b.text }}</p></div></div>{% endfor %}</div></div>
   </section>
