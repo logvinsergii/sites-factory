@@ -1,0 +1,36 @@
+site:
+  name: "SignDesk"
+  domain: "esign-002-air-slate.vercel.app"
+  lang: "en"
+  theme: "theme_beta"
+
+seo:
+  title: "Free Online Document Signing | SignDesk"
+  description: "Sign documents online instantly. Legally binding eSignatures under ESIGN and UETA. No printing, no scanning."
+  date_published: "2025-01-20T10:00:00Z"
+  date_modified:  "2025-04-15T10:00:00Z"
+  og_image: "https://esign-002-air-slate.vercel.app/og.png"
+  hreflang:
+    - lang: "en"
+      url:  "https://esign-002-air-slate.vercel.app/"
+
+content:
+  keyword: "online document signing"
+
+schema:
+  product_name:        "SignDesk"
+  product_description: "A fast, secure platform for signing documents online with legally binding eSignatures."
+  product_category:    "Productivity"
+  rating_value:        4.8
+  rating_count:        987
+  breadcrumbs:
+    - name: "Home"
+      url:  "https://esign-002-air-slate.vercel.app/"
+
+organization:
+  name: "SignDesk"
+  logo: "https://esign-002-air-slate.vercel.app/logo.png"
+  same_as: []
+
+analytics:
+  ahrefs_site_id: ""
