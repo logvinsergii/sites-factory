@@ -7,3 +7,4 @@ sites/*/content_history/
 .DS_Store
 key.txt
 *.key
+.vercel
