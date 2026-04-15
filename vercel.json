@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "PIP_CONFIG_FILE=pip_config/pip.conf pip install -r requirements.txt && python build.py --site sites/esign_002",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "sites/esign_002/output",
-  "installCommand": "PIP_CONFIG_FILE=pip_config/pip.conf pip install -r requirements.txt",
+  "installCommand": "echo skip",
   "framework": null,
   "routes": [
     { "src": "/sitemap.xml", "dest": "/sitemap.xml", "headers": { "Cache-Control": "public, max-age=86400" } },
