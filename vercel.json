@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "uv pip install -r requirements.txt --system && python build.py --site sites/esign_001",
+  "buildCommand": "python -m pip install -r requirements.txt && python build.py --site sites/esign_001",
   "outputDirectory": "sites/esign_001/output",
-  "installCommand": "uv pip install -r requirements.txt --system",
+  "installCommand": "python -m pip install -r requirements.txt",
   "framework": null,
   "routes": [
     {
